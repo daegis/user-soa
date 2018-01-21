@@ -1,7 +1,7 @@
 <configuration debug="false" scan="true" scanPeriod="60 seconds">
 	<!-- 设置日志输出根目录 -->
 	<property name="log.dir" value="/data/joblog/base-hapi" />
-	<property name="encoding" value="UTF-8" />
+	<property name="encoding" value="gbk" />
 	<property name="normal-pattern"
 		value="%d{yyyy-MM-dd.HH:mm:ss} %-5level [%thread] %logger{10}  %msg%n" />
 	<property name="console-pattern"
