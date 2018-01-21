@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ScheduleDetailMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.ScheduleDetail">
+		<id column="schedule_detail_id" property="scheduleDetailId" jdbcType="BIGINT" />
+		<result column="schedule_no" property="scheduleNo" jdbcType="VARCHAR" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="del_flag" property="delFlag" jdbcType="SMALLINT" />
+		<result column="order_sub_no" property="orderSubNo" jdbcType="VARCHAR" />
+		<result column="carrier" property="carrier" jdbcType="VARCHAR" />
+		<result column="carrier_name" property="carrierName" jdbcType="VARCHAR" />
+		<result column="dpt_airport" property="dptAirport" jdbcType="VARCHAR" />
+		<result column="dpt_airport_name" property="dptAirportName" jdbcType="VARCHAR" />
+		<result column="arr_airport" property="arrAirport" jdbcType="VARCHAR" />
+		<result column="arr_airport_name" property="arrAirportName" jdbcType="VARCHAR" />
+		<result column="dep_terminal" property="depTerminal" jdbcType="VARCHAR" />
+		<result column="arr_terminal" property="arrTerminal" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="terminal" property="terminal" jdbcType="VARCHAR" />
+		<result column="arr_time" property="arrTime" jdbcType="VARCHAR" />
+		<result column="dpt_time" property="dptTime" jdbcType="VARCHAR" />
+		<result column="dpt_date" property="dptDate" jdbcType="VARCHAR" />
+		<result column="arr_date" property="arrDate" jdbcType="VARCHAR" />
+		<result column="arr_city" property="arrCity" jdbcType="VARCHAR" />
+		<result column="arr_city_name" property="arrCityName" jdbcType="VARCHAR" />
+		<result column="depart_city" property="departCity" jdbcType="VARCHAR" />
+		<result column="depart_city_name" property="departCityName" jdbcType="VARCHAR" />
+		<result column="go_back" property="goBack" jdbcType="SMALLINT" />
+		<result column="flight_time" property="flightTime" jdbcType="INTEGER" />
+		<result column="cabin_desc" property="cabinDesc" jdbcType="VARCHAR" />
+		<result column="flight_status" property="flightStatus" jdbcType="INTEGER" />
+		<result column="checkin_counter" property="checkinCounter" jdbcType="VARCHAR" />
+		<result column="boarding_gate" property="boardingGate" jdbcType="VARCHAR" />
+		<result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="checkin_status" property="checkinStatus" jdbcType="INTEGER" />
+		<result column="seat_id" property="seatId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="scheduleDetailId != null"> and schedule_detail_id= #{scheduleDetailId}</if>	
+		<if test="scheduleNo != null and scheduleNo !=''"> and schedule_no= #{scheduleNo}</if>
+		<if test="orderNo != null and orderNo !=''"> and order_no= #{orderNo}</if>
+		<if test="delFlag != null"> and del_flag= #{delFlag}</if>	
+		<if test="orderSubNo != null and orderSubNo !=''"> and order_sub_no= #{orderSubNo}</if>
+		<if test="carrier != null and carrier !=''"> and carrier= #{carrier}</if>
+		<if test="carrierName != null and carrierName !=''"> and carrier_name= #{carrierName}</if>
+		<if test="dptAirport != null and dptAirport !=''"> and dpt_airport= #{dptAirport}</if>
+		<if test="dptAirportName != null and dptAirportName !=''"> and dpt_airport_name= #{dptAirportName}</if>
+		<if test="arrAirport != null and arrAirport !=''"> and arr_airport= #{arrAirport}</if>
+		<if test="arrAirportName != null and arrAirportName !=''"> and arr_airport_name= #{arrAirportName}</if>
+		<if test="depTerminal != null and depTerminal !=''"> and dep_terminal= #{depTerminal}</if>
+		<if test="arrTerminal != null and arrTerminal !=''"> and arr_terminal= #{arrTerminal}</if>
+		<if test="code != null and code !=''"> and code= #{code}</if>
+		<if test="terminal != null and terminal !=''"> and terminal= #{terminal}</if>
+		<if test="arrTime != null and arrTime !=''"> and arr_time= #{arrTime}</if>
+		<if test="dptTime != null and dptTime !=''"> and dpt_time= #{dptTime}</if>
+		<if test="dptDate != null and dptDate !=''"> and dpt_date= #{dptDate}</if>
+		<if test="arrDate != null and arrDate !=''"> and arr_date= #{arrDate}</if>
+		<if test="arrCity != null and arrCity !=''"> and arr_city= #{arrCity}</if>
+		<if test="arrCityName != null and arrCityName !=''"> and arr_city_name= #{arrCityName}</if>
+		<if test="departCity != null and departCity !=''"> and depart_city= #{departCity}</if>
+		<if test="departCityName != null and departCityName !=''"> and depart_city_name= #{departCityName}</if>
+		<if test="goBack != null"> and go_back= #{goBack}</if>	
+		<if test="flightTime != null"> and flight_time= #{flightTime}</if>	
+		<if test="cabinDesc != null and cabinDesc !=''"> and cabin_desc= #{cabinDesc}</if>
+		<if test="flightStatus != null"> and flight_status= #{flightStatus}</if>	
+		<if test="checkinCounter != null and checkinCounter !=''"> and checkin_counter= #{checkinCounter}</if>
+		<if test="boardingGate != null and boardingGate !=''"> and boarding_gate= #{boardingGate}</if>
+		<if test="beginDate != null"> and begin_date= #{beginDate}</if>	
+		<if test="endDate != null"> and end_date= #{endDate}</if>	
+		<if test="checkinStatus != null"> and checkin_status= #{checkinStatus}</if>	
+		<if test="seatId != null and seatId !=''"> and seat_id= #{seatId}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		schedule_detail_id ,
+		schedule_no ,
+		order_no ,
+		del_flag ,
+		order_sub_no ,
+		carrier ,
+		carrier_name ,
+		dpt_airport ,
+		dpt_airport_name ,
+		arr_airport ,
+		arr_airport_name ,
+		dep_terminal ,
+		arr_terminal ,
+		code ,
+		terminal ,
+		arr_time ,
+		dpt_time ,
+		dpt_date ,
+		arr_date ,
+		arr_city ,
+		arr_city_name ,
+		depart_city ,
+		depart_city_name ,
+		go_back ,
+		flight_time ,
+		cabin_desc ,
+		flight_status ,
+		checkin_counter ,
+		boarding_gate ,
+		begin_date ,
+		end_date ,
+		checkin_status ,
+		seat_id 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_detail
+		where
+		schedule_detail_id = #{scheduleDetailId,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from schedule_detail
+		where
+		schedule_detail_id = #{scheduleDetailId,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.ScheduleDetail">
+		insert into schedule_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="scheduleDetailId != null">schedule_detail_id,</if>	
+			<if test="scheduleNo != null and scheduleNo !=''">schedule_no,</if>
+			<if test="orderNo != null and orderNo !=''">order_no,</if>
+			<if test="delFlag != null">del_flag,</if>	
+			<if test="orderSubNo != null and orderSubNo !=''">order_sub_no,</if>
+			<if test="carrier != null and carrier !=''">carrier,</if>
+			<if test="carrierName != null and carrierName !=''">carrier_name,</if>
+			<if test="dptAirport != null and dptAirport !=''">dpt_airport,</if>
+			<if test="dptAirportName != null and dptAirportName !=''">dpt_airport_name,</if>
+			<if test="arrAirport != null and arrAirport !=''">arr_airport,</if>
+			<if test="arrAirportName != null and arrAirportName !=''">arr_airport_name,</if>
+			<if test="depTerminal != null and depTerminal !=''">dep_terminal,</if>
+			<if test="arrTerminal != null and arrTerminal !=''">arr_terminal,</if>
+			<if test="code != null and code !=''">code,</if>
+			<if test="terminal != null and terminal !=''">terminal,</if>
+			<if test="arrTime != null and arrTime !=''">arr_time,</if>
+			<if test="dptTime != null and dptTime !=''">dpt_time,</if>
+			<if test="dptDate != null and dptDate !=''">dpt_date,</if>
+			<if test="arrDate != null and arrDate !=''">arr_date,</if>
+			<if test="arrCity != null and arrCity !=''">arr_city,</if>
+			<if test="arrCityName != null and arrCityName !=''">arr_city_name,</if>
+			<if test="departCity != null and departCity !=''">depart_city,</if>
+			<if test="departCityName != null and departCityName !=''">depart_city_name,</if>
+			<if test="goBack != null">go_back,</if>	
+			<if test="flightTime != null">flight_time,</if>	
+			<if test="cabinDesc != null and cabinDesc !=''">cabin_desc,</if>
+			<if test="flightStatus != null">flight_status,</if>	
+			<if test="checkinCounter != null and checkinCounter !=''">checkin_counter,</if>
+			<if test="boardingGate != null and boardingGate !=''">boarding_gate,</if>
+			<if test="beginDate != null">begin_date,</if>	
+			<if test="endDate != null">end_date,</if>	
+			<if test="checkinStatus != null">checkin_status,</if>	
+			<if test="seatId != null and seatId !=''">seat_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="scheduleDetailId != null">
+				#{scheduleDetailId,jdbcType=BIGINT},
+			</if>
+			<if test="scheduleNo != null and scheduleNo !=''">
+				#{scheduleNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo !=''">
+				#{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=SMALLINT},
+			</if>
+			<if test="orderSubNo != null and orderSubNo !=''">
+				#{orderSubNo,jdbcType=VARCHAR},
+			</if>
+			<if test="carrier != null and carrier !=''">
+				#{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierName != null and carrierName !=''">
+				#{carrierName,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAirport != null and dptAirport !=''">
+				#{dptAirport,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAirportName != null and dptAirportName !=''">
+				#{dptAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirport != null and arrAirport !=''">
+				#{arrAirport,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirportName != null and arrAirportName !=''">
+				#{arrAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="depTerminal != null and depTerminal !=''">
+				#{depTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="arrTerminal != null and arrTerminal !=''">
+				#{arrTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null and code !=''">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="terminal != null and terminal !=''">
+				#{terminal,jdbcType=VARCHAR},
+			</if>
+			<if test="arrTime != null and arrTime !=''">
+				#{arrTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dptTime != null and dptTime !=''">
+				#{dptTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dptDate != null and dptDate !=''">
+				#{dptDate,jdbcType=VARCHAR},
+			</if>
+			<if test="arrDate != null and arrDate !=''">
+				#{arrDate,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCity != null and arrCity !=''">
+				#{arrCity,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCityName != null and arrCityName !=''">
+				#{arrCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="departCity != null and departCity !=''">
+				#{departCity,jdbcType=VARCHAR},
+			</if>
+			<if test="departCityName != null and departCityName !=''">
+				#{departCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="goBack != null">
+				#{goBack,jdbcType=SMALLINT},
+			</if>
+			<if test="flightTime != null">
+				#{flightTime,jdbcType=INTEGER},
+			</if>
+			<if test="cabinDesc != null and cabinDesc !=''">
+				#{cabinDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="flightStatus != null">
+				#{flightStatus,jdbcType=INTEGER},
+			</if>
+			<if test="checkinCounter != null and checkinCounter !=''">
+				#{checkinCounter,jdbcType=VARCHAR},
+			</if>
+			<if test="boardingGate != null and boardingGate !=''">
+				#{boardingGate,jdbcType=VARCHAR},
+			</if>
+			<if test="beginDate != null">
+				#{beginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="checkinStatus != null">
+				#{checkinStatus,jdbcType=INTEGER},
+			</if>
+			<if test="seatId != null and seatId !=''">
+				#{seatId,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.ScheduleDetail">
+		update schedule_detail
+		<set>
+			<if test="scheduleNo != null and scheduleNo !=''">
+				schedule_no= #{scheduleNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo !=''">
+				order_no= #{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				del_flag= #{delFlag,jdbcType=SMALLINT},
+			</if>
+			<if test="orderSubNo != null and orderSubNo !=''">
+				order_sub_no= #{orderSubNo,jdbcType=VARCHAR},
+			</if>
+			<if test="carrier != null and carrier !=''">
+				carrier= #{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierName != null and carrierName !=''">
+				carrier_name= #{carrierName,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAirport != null and dptAirport !=''">
+				dpt_airport= #{dptAirport,jdbcType=VARCHAR},
+			</if>
+			<if test="dptAirportName != null and dptAirportName !=''">
+				dpt_airport_name= #{dptAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirport != null and arrAirport !=''">
+				arr_airport= #{arrAirport,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirportName != null and arrAirportName !=''">
+				arr_airport_name= #{arrAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="depTerminal != null and depTerminal !=''">
+				dep_terminal= #{depTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="arrTerminal != null and arrTerminal !=''">
+				arr_terminal= #{arrTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null and code !=''">
+				code= #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="terminal != null and terminal !=''">
+				terminal= #{terminal,jdbcType=VARCHAR},
+			</if>
+			<if test="arrTime != null and arrTime !=''">
+				arr_time= #{arrTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dptTime != null and dptTime !=''">
+				dpt_time= #{dptTime,jdbcType=VARCHAR},
+			</if>
+			<if test="dptDate != null and dptDate !=''">
+				dpt_date= #{dptDate,jdbcType=VARCHAR},
+			</if>
+			<if test="arrDate != null and arrDate !=''">
+				arr_date= #{arrDate,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCity != null and arrCity !=''">
+				arr_city= #{arrCity,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCityName != null and arrCityName !=''">
+				arr_city_name= #{arrCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="departCity != null and departCity !=''">
+				depart_city= #{departCity,jdbcType=VARCHAR},
+			</if>
+			<if test="departCityName != null and departCityName !=''">
+				depart_city_name= #{departCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="goBack != null">
+				go_back= #{goBack,jdbcType=SMALLINT},
+			</if>
+			<if test="flightTime != null">
+				flight_time= #{flightTime,jdbcType=INTEGER},
+			</if>
+			<if test="cabinDesc != null and cabinDesc !=''">
+				cabin_desc= #{cabinDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="flightStatus != null">
+				flight_status= #{flightStatus,jdbcType=INTEGER},
+			</if>
+			<if test="checkinCounter != null and checkinCounter !=''">
+				checkin_counter= #{checkinCounter,jdbcType=VARCHAR},
+			</if>
+			<if test="boardingGate != null and boardingGate !=''">
+				boarding_gate= #{boardingGate,jdbcType=VARCHAR},
+			</if>
+			<if test="beginDate != null">
+				begin_date= #{beginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				end_date= #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="checkinStatus != null">
+				checkin_status= #{checkinStatus,jdbcType=INTEGER},
+			</if>
+			<if test="seatId != null and seatId !=''">
+				seat_id= #{seatId,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		schedule_detail_id = #{scheduleDetailId,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_detail where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from schedule_detail where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_detail where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_detail where schedule_detail_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<!-- 行程主页信息联合查询 -->
+	<select id="selectScheduleMainFlightByNowDateAndUserId" resultType="com.hnair.consumer.user.vo.ScheduleRespVo" parameterType="map">
+		select  
+			f.order_no orderNo,
+			f.schedule_no scheduleNo,
+			d.order_sub_no orderSubNo,
+			f.schedule_type scheduleType,
+            d.carrier_name carrierName,
+            d.arr_airport_name arrAirportName,
+            d.arr_airport arrAirport,
+			d.dpt_airport_name dptAirportName,
+            d.dpt_airport dptAirport,
+            d.dep_terminal depTerminal,
+            d.arr_terminal arrTerminal,
+            d.code code,
+            d.arr_time arrTime,
+			d.dpt_time dptTime,
+            d.arr_date arrDate,
+			d.dpt_date dptDate,
+            d.arr_city_name arrCityName,
+			d.depart_city_name departCityName,
+            f.go_Back goBack,
+            d.flight_time flightTime,
+            f.depart_city_name departCityMain,
+            f.dest_city destCity,
+            f.dest_country destCountry
+		from  
+			schedule_main f, 
+			schedule_detail d
+		where  
+		    f.schedule_no = d.schedule_no
+			and f.schedule_no =
+           (select fi.schedule_no 
+           from schedule_main fi 
+           where fi.end_date &gt;= CURDATE()
+		   and fi.user_id = #{userId} 
+		   order by fi.begin_date limit 1)
+        and d.arr_date &gt;= CURDATE()
+	    order by d.dpt_date,d.order_sub_no limit 1
+	</select>
+	<!-- 行程主页信息联合查询 -->
+	<select id="selectScheduleMainByNowDateAndUserId" resultType="com.hnair.consumer.user.vo.ScheduleRespVo" parameterType="map">
+		select  
+			f.order_no orderNo,
+			f.schedule_no scheduleNo,
+			d.order_sub_no orderSubNo,
+			f.schedule_type scheduleType,
+            d.carrier_name carrierName,
+            d.arr_airport_name arrAirportName,
+            d.arr_airport arrAirport,
+			d.dpt_airport_name dptAirportName,
+            d.dpt_airport dptAirport,
+            d.dep_terminal depTerminal,
+            d.arr_terminal arrTerminal,
+            d.code code,
+            d.arr_time arrTime,
+			d.dpt_time dptTime,
+            d.arr_date arrDate,
+			d.dpt_date dptDate,
+            d.arr_city_name arrCityName,
+			d.depart_city_name departCityName,
+            f.go_Back goBack,
+            d.flight_time flightTime,
+            f.depart_city_name departCityMain,
+            f.dest_city destCity,
+            f.dest_country destCountry
+		from  
+			schedule_main f, 
+			schedule_detail d
+		where  
+		    f.schedule_no = d.schedule_no
+			and f.schedule_no =
+           (select fi.schedule_no 
+           from schedule_main fi 
+           where fi.end_date &gt;= NOW()
+		   and fi.user_id = #{userId} 
+		   order by fi.begin_date limit 1)
+        and d.arr_date &gt;= CURDATE()
+	    order by d.dpt_date,d.order_sub_no limit 1
+	</select>
+	<!-- 行程詳情信息主訂單联合查询 -->
+	<select id="selectScheduleDetailByNowDateAndUserId" resultType="com.hnair.consumer.user.vo.ScheduleRespVo" parameterType="map">
+		select  
+			f.order_no orderNo,
+			f.schedule_no scheduleNo,
+			d.order_sub_no orderSubNo,
+			f.schedule_type scheduleType,
+            d.carrier_name carrierName,
+            d.arr_airport_name arrAirportName,
+            d.arr_airport arrAirport,
+			d.dpt_airport_name dptAirportName,
+            d.dpt_airport dptAirport,
+            d.dep_terminal depTerminal,
+            d.arr_terminal arrTerminal,
+            d.code code,
+            d.arr_time arrTime,
+			d.dpt_time dptTime,
+            d.arr_date arrDate,
+			d.dpt_date dptDate,
+			d.checkin_status checkinStatus,
+            d.arr_city_name arrCityName,
+			d.depart_city_name departCityName,
+            d.go_Back goBack,
+            d.flight_time flightTime,
+            f.depart_city_name departCityMain,
+			f.dest_city destCity,
+            f.dest_country destCountry
+		from  
+			schedule_main f, 
+			schedule_detail d
+		where    
+		    f.schedule_no = d.schedule_no
+			and f.schedule_no =#{scheduleNo} 
+	    order by d.dpt_date,d.order_sub_no
+	</select>
+	<update id="updateScheduleCheckinInfo" parameterType="map">
+		update schedule_detail set checkin_status= #{checkinStatus,jdbcType=INTEGER},seat_id= #{seatId,jdbcType=VARCHAR}
+		where order_sub_no=#{orderSubNo,jdbcType=VARCHAR} 
+	</update>
+	
+  <select id="getListByOrderNo" resultMap="BaseResultMap" parameterType="map">
+  	select <include refid="Base_Column_List" /> 
+  	FROM `schedule_detail` WHERE order_no = #{orderNo}  and order_sub_no = #{orderSubNo}
+  </select>
+
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MessageCodeMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.MessageCode">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="region" property="region" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="identify_code" property="identifyCode" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+		<result column="msg_code_type" property="msgCodeType" jdbcType="SMALLINT" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="region != null and region !=''"> and region= #{region}</if>
+		<if test="mobile != null and mobile !=''"> and mobile= #{mobile}</if>
+		<if test="identifyCode != null and identifyCode !=''"> and identify_code= #{identifyCode}</if>
+		<if test="status != null"> and status= #{status}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="lastModifyTime != null"> and last_modify_time= #{lastModifyTime}</if>	
+		<if test="msgCodeType != null"> and msg_code_type= #{msgCodeType}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		region ,
+		mobile ,
+		identify_code ,
+		status ,
+		create_time ,
+		last_modify_time ,
+		msg_code_type 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from message_code
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from message_code
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.MessageCode">
+		insert into message_code
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="region != null and region !=''">region,</if>
+			<if test="mobile != null and mobile !=''">mobile,</if>
+			<if test="identifyCode != null and identifyCode !=''">identify_code,</if>
+			<if test="status != null">status,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="lastModifyTime != null">last_modify_time,</if>	
+			<if test="msgCodeType != null">msg_code_type,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="region != null and region !=''">
+				#{region,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="identifyCode != null and identifyCode !=''">
+				#{identifyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="msgCodeType != null">
+				#{msgCodeType,jdbcType=SMALLINT},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.MessageCode">
+		update message_code
+		<set>
+			<if test="region != null and region !=''">
+				region= #{region,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				mobile= #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="identifyCode != null and identifyCode !=''">
+				identify_code= #{identifyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status= #{status,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="msgCodeType != null">
+				msg_code_type= #{msgCodeType,jdbcType=SMALLINT}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from message_code where 1=1
+		<include refid="Base_Where" /> order by id desc
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from message_code where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from message_code where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from message_code where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<update id="updateStatusByPhoneNum" parameterType="com.hnair.consumer.user.model.MessageCode">
+		update message_code
+		<set>
+			<if test="status != null">
+				status= #{status,jdbcType=TINYINT},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		mobile = #{mobile,jdbcType=VARCHAR} 
+		<if test="msgCodeType != null"> and msg_code_type= #{msgCodeType}</if>	
+		<if test="region != null and region !=''"> and region= #{region}</if>	
+	</update>
+</mapper>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ScheduleMainMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.ScheduleMain">
+		<id column="schedule_id" property="scheduleId" jdbcType="BIGINT" />
+		<result column="schedule_no" property="scheduleNo" jdbcType="VARCHAR" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="schedule_type" property="scheduleType" jdbcType="VARCHAR" />
+		<result column="del_flag" property="delFlag" jdbcType="SMALLINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="BIGINT" />
+		<result column="air_line_type" property="airLineType" jdbcType="SMALLINT" />
+		<result column="trip_type" property="tripType" jdbcType="SMALLINT" />
+		<result column="go_back" property="goBack" jdbcType="SMALLINT" />
+		<result column="arr_city" property="arrCity" jdbcType="VARCHAR" />
+		<result column="arr_city_name" property="arrCityName" jdbcType="VARCHAR" />
+		<result column="depart_city" property="departCity" jdbcType="VARCHAR" />
+		<result column="depart_city_name" property="departCityName" jdbcType="VARCHAR" />
+		<result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="dest_country" property="destCountry" jdbcType="VARCHAR" />
+		<result column="dest_city" property="destCity" jdbcType="VARCHAR" />
+		<result column="ref_order_no" property="refOrderNo" jdbcType="VARCHAR" />
+		<result column="schedule_second_type" property="scheduleSecondType" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="scheduleId != null"> and schedule_id= #{scheduleId}</if>
+		<if test="scheduleNo != null and scheduleNo !=''"> and schedule_no= #{scheduleNo}</if>
+		<if test="orderNo != null and orderNo !=''"> and order_no= #{orderNo}</if>
+		<if test="scheduleType != null and scheduleType !=''"> and schedule_type= #{scheduleType}</if>
+		<if test="delFlag != null"> and del_flag= #{delFlag}</if>
+		<if test="userId != null"> and user_id= #{userId}</if>
+		<if test="userName != null and userName !=''"> and user_name= #{userName}</if>
+		<if test="productName != null and productName !=''"> and product_name= #{productName}</if>
+		<if test="productId != null"> and product_id= #{productId}</if>
+		<if test="airLineType != null"> and air_line_type= #{airLineType}</if>
+		<if test="tripType != null"> and trip_type= #{tripType}</if>
+		<if test="goBack != null"> and go_back= #{goBack}</if>
+		<if test="arrCity != null and arrCity !=''"> and arr_city= #{arrCity}</if>
+		<if test="arrCityName != null and arrCityName !=''"> and arr_city_name= #{arrCityName}</if>
+		<if test="departCity != null and departCity !=''"> and depart_city= #{departCity}</if>
+		<if test="departCityName != null and departCityName !=''"> and depart_city_name= #{departCityName}</if>
+		<if test="beginDate != null"> and begin_date= #{beginDate}</if>
+		<if test="endDate != null"> and end_date= #{endDate}</if>
+		<if test="destCountry != null and destCountry !=''"> and dest_country= #{destCountry}</if>
+		<if test="destCity != null and destCity !=''"> and dest_city= #{destCity}</if>
+		<if test="refOrderNo != null and refOrderNo !=''"> and ref_order_no= #{refOrderNo}</if>
+		<if test="scheduleSecondType != null and scheduleSecondType !=''"> and schedule_second_type= #{scheduleSecondType}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		schedule_id ,
+		schedule_no ,
+		order_no ,
+		schedule_type ,
+		del_flag ,
+		user_id ,
+		user_name ,
+		product_name ,
+		product_id ,
+		air_line_type ,
+		trip_type ,
+		go_back ,
+		arr_city ,
+		arr_city_name ,
+		depart_city ,
+		depart_city_name ,
+		begin_date ,
+		end_date ,
+		dest_country ,
+		dest_city ,
+		ref_order_no ,
+		schedule_second_type 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_main
+		where
+		schedule_id = #{scheduleId,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from schedule_main
+		where
+		schedule_id = #{scheduleId,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.ScheduleMain">
+		insert into schedule_main
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="scheduleId != null">schedule_id,</if>
+			<if test="scheduleNo != null and scheduleNo !=''">schedule_no,</if>
+			<if test="orderNo != null and orderNo !=''">order_no,</if>
+			<if test="scheduleType != null and scheduleType !=''">schedule_type,</if>
+			<if test="delFlag != null">del_flag,</if>
+			<if test="userId != null">user_id,</if>
+			<if test="userName != null and userName !=''">user_name,</if>
+			<if test="productName != null and productName !=''">product_name,</if>
+			<if test="productId != null">product_id,</if>
+			<if test="airLineType != null">air_line_type,</if>
+			<if test="tripType != null">trip_type,</if>
+			<if test="goBack != null">go_back,</if>
+			<if test="arrCity != null and arrCity !=''">arr_city,</if>
+			<if test="arrCityName != null and arrCityName !=''">arr_city_name,</if>
+			<if test="departCity != null and departCity !=''">depart_city,</if>
+			<if test="departCityName != null and departCityName !=''">depart_city_name,</if>
+			<if test="beginDate != null">begin_date,</if>
+			<if test="endDate != null">end_date,</if>
+			<if test="destCountry != null and destCountry !=''">dest_country,</if>
+			<if test="destCity != null and destCity !=''">dest_city,</if>
+			<if test="refOrderNo != null and refOrderNo !=''">ref_order_no,</if>
+			<if test="scheduleSecondType != null and scheduleSecondType !=''">schedule_second_type,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="scheduleId != null">
+				#{scheduleId,jdbcType=BIGINT},
+			</if>
+			<if test="scheduleNo != null and scheduleNo !=''">
+				#{scheduleNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo !=''">
+				#{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduleType != null and scheduleType !=''">
+				#{scheduleType,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=SMALLINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null and userName !=''">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null and productName !=''">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=BIGINT},
+			</if>
+			<if test="airLineType != null">
+				#{airLineType,jdbcType=SMALLINT},
+			</if>
+			<if test="tripType != null">
+				#{tripType,jdbcType=SMALLINT},
+			</if>
+			<if test="goBack != null">
+				#{goBack,jdbcType=SMALLINT},
+			</if>
+			<if test="arrCity != null and arrCity !=''">
+				#{arrCity,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCityName != null and arrCityName !=''">
+				#{arrCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="departCity != null and departCity !=''">
+				#{departCity,jdbcType=VARCHAR},
+			</if>
+			<if test="departCityName != null and departCityName !=''">
+				#{departCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="beginDate != null">
+				#{beginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="destCountry != null and destCountry !=''">
+				#{destCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="destCity != null and destCity !=''">
+				#{destCity,jdbcType=VARCHAR},
+			</if>
+			<if test="refOrderNo != null and refOrderNo !=''">
+				#{refOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduleSecondType != null and scheduleSecondType !=''">
+				#{scheduleSecondType,jdbcType=VARCHAR},
+			</if>
+
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.ScheduleMain">
+		update schedule_main
+		<set>
+			<if test="scheduleNo != null and scheduleNo !=''">
+				schedule_no= #{scheduleNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo !=''">
+				order_no= #{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduleType != null and scheduleType !=''">
+				schedule_type= #{scheduleType,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				del_flag= #{delFlag,jdbcType=SMALLINT},
+			</if>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null and userName !=''">
+				user_name= #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null and productName !=''">
+				product_name= #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id= #{productId,jdbcType=BIGINT},
+			</if>
+			<if test="airLineType != null">
+				air_line_type= #{airLineType,jdbcType=SMALLINT},
+			</if>
+			<if test="tripType != null">
+				trip_type= #{tripType,jdbcType=SMALLINT},
+			</if>
+			<if test="goBack != null">
+				go_back= #{goBack,jdbcType=SMALLINT},
+			</if>
+			<if test="arrCity != null and arrCity !=''">
+				arr_city= #{arrCity,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCityName != null and arrCityName !=''">
+				arr_city_name= #{arrCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="departCity != null and departCity !=''">
+				depart_city= #{departCity,jdbcType=VARCHAR},
+			</if>
+			<if test="departCityName != null and departCityName !=''">
+				depart_city_name= #{departCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="beginDate != null">
+				begin_date= #{beginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				end_date= #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="destCountry != null and destCountry !=''">
+				dest_country= #{destCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="destCity != null and destCity !=''">
+				dest_city= #{destCity,jdbcType=VARCHAR},
+			</if>
+			<if test="refOrderNo != null and refOrderNo !=''">
+				ref_order_no= #{refOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduleSecondType != null and scheduleSecondType !=''">
+				schedule_second_type= #{scheduleSecondType,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		schedule_id = #{scheduleId,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_main where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from schedule_main where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_main where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_main where schedule_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+    <select id="selectRecommendOrder" resultType="com.hnair.consumer.user.vo.recommendation.BaseRecommendVo" parameterType="map">
+        SELECT
+        name,weight,category
+        FROM
+        schedule_recommend_order
+        WHERE
+        in_use = 1
+        AND
+        #{inthour} &gt;= ttl
+        AND
+        #{inthour} &lt; tol
+        ORDER BY
+        weight
+    </select>
+
+    <select id="selectMtsInfo" resultType="com.hnair.consumer.user.vo.recommendation.MtsRecommendationVo" parameterType="map">
+        SELECT
+        r.id as 'id',
+        r.name as 'name',
+        r.url as 'url',
+        r.pic as 'pic',
+        r.describe as 'describe',
+        r.weight as 'weight'
+        FROM
+        schedule_mts_recommend r,
+        schedule_mts_time t
+        WHERE r.id = t.rid
+        <if test="hourInterval!=null and hourInterval!=''">
+            AND t.ttl &lt; #{hourInterval,jdbcType=BIGINT}
+        </if>
+        ORDER BY weight DESC
+    </select>
+
+</mapper>

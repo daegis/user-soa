@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CreditBillModifyMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CreditBillModify">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="credit_bill_id" property="creditBillId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="old_credit_count" property="oldCreditCount" jdbcType="BIGINT" />
+		<result column="new_credit_count" property="newCreditCount" jdbcType="BIGINT" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="creditBillId != null"> and credit_bill_id= #{creditBillId}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="oldCreditCount != null"> and old_credit_count= #{oldCreditCount}</if>	
+		<if test="newCreditCount != null"> and new_credit_count= #{newCreditCount}</if>	
+		<if test="description != null and description !=''"> and description= #{description}</if>
+		<if test="createBy != null"> and create_by= #{createBy}</if>	
+		<if test="createName != null and createName !=''"> and create_name= #{createName}</if>
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		credit_bill_id ,
+		user_id ,
+		old_credit_count ,
+		new_credit_count ,
+		description ,
+		create_by ,
+		create_name ,
+		create_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from credit_bill_modify
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from credit_bill_modify
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CreditBillModify">
+		insert into credit_bill_modify
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="creditBillId != null">credit_bill_id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="oldCreditCount != null">old_credit_count,</if>	
+			<if test="newCreditCount != null">new_credit_count,</if>	
+			<if test="description != null and description !=''">description,</if>
+			<if test="createBy != null">create_by,</if>	
+			<if test="createName != null and createName !=''">create_name,</if>
+			<if test="createTime != null">create_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="creditBillId != null">
+				#{creditBillId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="oldCreditCount != null">
+				#{oldCreditCount,jdbcType=BIGINT},
+			</if>
+			<if test="newCreditCount != null">
+				#{newCreditCount,jdbcType=BIGINT},
+			</if>
+			<if test="description != null and description !=''">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createName != null and createName !=''">
+				#{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CreditBillModify">
+		update credit_bill_modify
+		<set>
+			<if test="creditBillId != null">
+				credit_bill_id= #{creditBillId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="oldCreditCount != null">
+				old_credit_count= #{oldCreditCount,jdbcType=BIGINT},
+			</if>
+			<if test="newCreditCount != null">
+				new_credit_count= #{newCreditCount,jdbcType=BIGINT},
+			</if>
+			<if test="description != null and description !=''">
+				description= #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by= #{createBy,jdbcType=BIGINT},
+			</if>
+			<if test="createName != null and createName !=''">
+				create_name= #{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_bill_modify where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from credit_bill_modify where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_bill_modify where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from credit_bill_modify where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

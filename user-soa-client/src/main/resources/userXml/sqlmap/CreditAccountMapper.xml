@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CreditAccountMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CreditAccount">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="credits_available" property="creditsAvailable" jdbcType="BIGINT" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="credits_income" property="creditsIncome" jdbcType="BIGINT" />
+		<result column="credits_expend" property="creditsExpend" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="BaseResultMapCMS" type="com.hnair.consumer.user.model.CreditAccount">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="credits_available" property="creditsAvailable" jdbcType="BIGINT" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="credits_income" property="creditsIncome" jdbcType="BIGINT" />
+		<result column="credits_expend" property="creditsExpend" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="creditsAvailable != null"> and credits_available= #{creditsAvailable}</if>	
+		<if test="mobile != null and mobile !=''"> and mobile= #{mobile}</if>
+		<if test="creditsIncome != null"> and credits_income= #{creditsIncome}</if>	
+		<if test="creditsExpend != null"> and credits_expend= #{creditsExpend}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="updateTime != null"> and update_time= #{updateTime}</if>	
+		<if test="status != null"> and status= #{status}</if>
+		<if test="expireTime != null"> and expire_time= #{expireTime}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		user_id ,
+		credits_available ,
+		mobile ,
+		credits_income ,
+		credits_expend ,
+		create_time ,
+		update_time ,
+		status,
+		expire_time 
+	</sql>
+	
+	<sql id="Base_Where_CMS">
+		<if test="userId != null"> and c.user_id= #{userId}</if>	
+		<if test="creditsAvailable != null"> and c.credits_available= #{creditsAvailable}</if>	
+		<if test="mobile != null and mobile !=''"> and c.mobile= #{mobile}</if>
+		<if test="creditsIncome != null"> and c.credits_income= #{creditsIncome}</if>	
+		<if test="creditsExpend != null"> and c.credits_expend= #{creditsExpend}</if>	
+		<if test="createTime != null"> and c.create_time= #{createTime}</if>	
+		<if test="updateTime != null"> and c.update_time= #{updateTime}</if>	
+		<if test="status != null"> and c.status= #{status}</if>
+		<if test="expireTime != null"> and c.expire_time= #{expireTime}</if>	
+		<if test="userName != null and userName !=''"> and u.user_name like concat('%',#{userName},'%')</if>
+	</sql>
+	
+	<sql id="Base_Column_List_CMS">
+		c.id ,
+		c.user_id ,
+		c.credits_available ,
+		c.mobile ,
+		c.credits_income ,
+		c.credits_expend ,
+		c.create_time ,
+		c.update_time ,
+		c.status,
+		c.expire_time ,
+		u.user_name
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from credit_account
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from credit_account
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CreditAccount">
+		insert into credit_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="creditsAvailable != null">credits_available,</if>	
+			<if test="mobile != null and mobile !=''">mobile,</if>
+			<if test="creditsIncome != null">credits_income,</if>	
+			<if test="creditsExpend != null">credits_expend,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="updateTime != null">update_time,</if>	
+			<if test="status != null">status,</if>	
+			<if test="expireTime != null">expire_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="creditsAvailable != null">
+				#{creditsAvailable,jdbcType=BIGINT},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="creditsIncome != null">
+				#{creditsIncome,jdbcType=BIGINT},
+			</if>
+			<if test="creditsExpend != null">
+				#{creditsExpend,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="expireTime != null">
+				#{expireTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CreditAccount">
+		update credit_account
+		<set>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="creditsAvailable != null">
+				credits_available= #{creditsAvailable,jdbcType=BIGINT},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				mobile= #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="creditsIncome != null">
+				credits_income= #{creditsIncome,jdbcType=BIGINT},
+			</if>
+			<if test="creditsExpend != null">
+				credits_expend= #{creditsExpend,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time= #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status= #{status,jdbcType=INTEGER},
+			</if>
+			<if test="expireTime != null">
+				expire_time= #{expireTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_account where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="getAllCMS" resultMap="BaseResultMapCMS" parameterType="map">
+		select
+		<include refid="Base_Column_List_CMS" />
+		from credit_account c INNER JOIN user_base_info u ON c.user_id=u.user_id where 1=1
+		<include refid="Base_Where_CMS" />
+		order by id desc
+	</select>
+	
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from credit_account where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCountCMS" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from credit_account c INNER JOIN user_base_info u ON c.user_id=u.user_id where 1=1
+		<include refid="Base_Where_CMS" />
+	</select>
+	
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_account where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageDataCMS" resultMap="BaseResultMapCMS" parameterType="map">
+		select
+		<include refid="Base_Column_List_CMS" />
+		from credit_account c INNER JOIN user_base_info u ON c.user_id=u.user_id where 1=1
+		<include refid="Base_Where_CMS" />
+	  	order by id desc	
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from credit_account where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

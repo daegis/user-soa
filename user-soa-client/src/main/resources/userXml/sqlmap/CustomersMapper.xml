@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CustomersMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.Customers">
+		<id column="cid" property="cid" jdbcType="INTEGER" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="cnote" property="cnote" jdbcType="VARCHAR" />
+		<result column="first_add" property="firstAdd" jdbcType="TIMESTAMP" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+		<result column="in_use" property="inUse" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="special" property="special" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="cid != null"> and cid= #{cid}</if>	
+		<if test="address != null and address !=''"> and address= #{address}</if>
+		<if test="cnote != null and cnote !=''"> and cnote= #{cnote}</if>
+		<if test="firstAdd != null"> and first_add= #{firstAdd}</if>	
+		<if test="gender != null and gender !=''"> and gender= #{gender}</if>
+		<if test="idNumber != null and idNumber !=''"> and id_number= #{idNumber}</if>
+		<if test="inUse != null and inUse !=''"> and in_use= #{inUse}</if>
+		<if test="mobile != null and mobile !=''"> and mobile= #{mobile}</if>
+		<if test="name != null and name !=''"> and name= #{name}</if>
+		<if test="nickname != null and nickname !=''"> and nickname= #{nickname}</if>
+		<if test="special != null and special !=''"> and special= #{special}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		cid ,
+		address ,
+		cnote ,
+		first_add ,
+		gender ,
+		id_number ,
+		in_use ,
+		mobile ,
+		name ,
+		nickname ,
+		special 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from customers
+		where
+		cid = #{cid,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from customers
+		where
+		cid = #{cid,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.Customers">
+		insert into customers
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cid != null">cid,</if>	
+			<if test="address != null and address !=''">address,</if>
+			<if test="cnote != null and cnote !=''">cnote,</if>
+			<if test="firstAdd != null">first_add,</if>	
+			<if test="gender != null and gender !=''">gender,</if>
+			<if test="idNumber != null and idNumber !=''">id_number,</if>
+			<if test="inUse != null and inUse !=''">in_use,</if>
+			<if test="mobile != null and mobile !=''">mobile,</if>
+			<if test="name != null and name !=''">name,</if>
+			<if test="nickname != null and nickname !=''">nickname,</if>
+			<if test="special != null and special !=''">special,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cid != null">
+				#{cid,jdbcType=INTEGER},
+			</if>
+			<if test="address != null and address !=''">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="cnote != null and cnote !=''">
+				#{cnote,jdbcType=VARCHAR},
+			</if>
+			<if test="firstAdd != null">
+				#{firstAdd,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gender != null and gender !=''">
+				#{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="idNumber != null and idNumber !=''">
+				#{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="inUse != null and inUse !=''">
+				#{inUse,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null and name !=''">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null and nickname !=''">
+				#{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="special != null and special !=''">
+				#{special,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.Customers">
+		update customers
+		<set>
+			<if test="address != null and address !=''">
+				address= #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="cnote != null and cnote !=''">
+				cnote= #{cnote,jdbcType=VARCHAR},
+			</if>
+			<if test="firstAdd != null">
+				first_add= #{firstAdd,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gender != null and gender !=''">
+				gender= #{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="idNumber != null and idNumber !=''">
+				id_number= #{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="inUse != null and inUse !=''">
+				in_use= #{inUse,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				mobile= #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null and name !=''">
+				name= #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null and nickname !=''">
+				nickname= #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="special != null and special !=''">
+				special= #{special,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		cid = #{cid,jdbcType=INTEGER}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from customers where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from customers where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from customers where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from customers where cid in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

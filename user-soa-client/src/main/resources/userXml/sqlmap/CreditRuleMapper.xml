@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CreditRuleMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CreditRule">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="task_type" property="taskType" jdbcType="INTEGER" />
+		<result column="task_name" property="taskName" jdbcType="VARCHAR" />
+		<result column="calculate_type" property="calculateType" jdbcType="INTEGER" />
+		<result column="calculate_rule" property="calculateRule" jdbcType="DOUBLE" />
+		<result column="rule_des" property="ruleDes" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="taskType != null"> and task_type= #{taskType}</if>	
+		<if test="taskName != null and taskName !=''"> and task_name= #{taskName}</if>
+		<if test="calculateType != null"> and calculate_type= #{calculateType}</if>	
+		<if test="calculateRule != null"> and calculate_rule= #{calculateRule}</if>	
+		<if test="ruleDes != null and ruleDes !=''"> and rule_des= #{ruleDes}</if>
+		<if test="status != null"> and status= #{status}</if>	
+		<if test="endTime != null"> and end_time <![CDATA[>=]]> #{endTime}</if>
+		<if test="startTime != null"> and start_time <![CDATA[<=]]> #{startTime}</if>
+		<if test="currentTime != null"> and start_time<![CDATA[<=]]> #{currentTime} and end_time<![CDATA[>=]]> #{currentTime}</if>
+		<if test="createUserId != null"> and create_user_id= #{createUserId}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="updateUserId != null"> and update_user_id= #{updateUserId}</if>	
+		<if test="updateTime != null"> and update_time= #{updateTime}</if>
+
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		task_type ,
+		task_name ,
+		calculate_type ,
+		calculate_rule ,
+		rule_des ,
+		status ,
+		end_time ,
+		start_time ,
+		create_user_id ,
+		create_time ,
+		update_user_id ,
+		update_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from credit_rule
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from credit_rule
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CreditRule">
+		insert into credit_rule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="taskType != null">task_type,</if>	
+			<if test="taskName != null and taskName !=''">task_name,</if>
+			<if test="calculateType != null">calculate_type,</if>	
+			<if test="calculateRule != null">calculate_rule,</if>	
+			<if test="ruleDes != null and ruleDes !=''">rule_des,</if>
+			<if test="status != null">status,</if>	
+			<if test="endTime != null">end_time,</if>	
+			<if test="startTime != null">start_time,</if>	
+			<if test="createUserId != null">create_user_id,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="updateUserId != null">update_user_id,</if>	
+			<if test="updateTime != null">update_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="taskType != null">
+				#{taskType,jdbcType=INTEGER},
+			</if>
+			<if test="taskName != null and taskName !=''">
+				#{taskName,jdbcType=VARCHAR},
+			</if>
+			<if test="calculateType != null">
+				#{calculateType,jdbcType=INTEGER},
+			</if>
+			<if test="calculateRule != null">
+				#{calculateRule,jdbcType=DOUBLE},
+			</if>
+			<if test="ruleDes != null and ruleDes !=''">
+				#{ruleDes,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUserId != null">
+				#{updateUserId,jdbcType=BIGINT},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CreditRule">
+		update credit_rule
+		<set>
+			<if test="taskType != null">
+				task_type= #{taskType,jdbcType=INTEGER},
+			</if>
+			<if test="taskName != null and taskName !=''">
+				task_name= #{taskName,jdbcType=VARCHAR},
+			</if>
+			<if test="calculateType != null">
+				calculate_type= #{calculateType,jdbcType=INTEGER},
+			</if>
+			<if test="calculateRule != null">
+				calculate_rule= #{calculateRule,jdbcType=DOUBLE},
+			</if>
+			<if test="ruleDes != null and ruleDes !=''">
+				rule_des= #{ruleDes,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status= #{status,jdbcType=INTEGER},
+			</if>
+			<if test="endTime != null">
+				end_time= #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startTime != null">
+				start_time= #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				create_user_id= #{createUserId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUserId != null">
+				update_user_id= #{updateUserId,jdbcType=BIGINT},
+			</if>
+			<if test="updateTime != null">
+				update_time= #{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_rule where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from credit_rule where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_rule where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from credit_rule where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

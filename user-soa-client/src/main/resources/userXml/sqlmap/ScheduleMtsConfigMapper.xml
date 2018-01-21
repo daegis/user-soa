@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ScheduleMtsConfigMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.ScheduleMtsConfig">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="rid" property="rid" jdbcType="INTEGER" />
+		<result column="carrier" property="carrier" jdbcType="VARCHAR" />
+		<result column="carrier_name" property="carrierName" jdbcType="VARCHAR" />
+		<result column="dept_city_name" property="deptCityName" jdbcType="VARCHAR" />
+		<result column="dept_airport_name" property="deptAirportName" jdbcType="VARCHAR" />
+		<result column="dept_airport_terminal" property="deptAirportTerminal" jdbcType="VARCHAR" />
+		<result column="dept_country" property="deptCountry" jdbcType="VARCHAR" />
+		<result column="arr_city_name" property="arrCityName" jdbcType="VARCHAR" />
+		<result column="arr_airport_name" property="arrAirportName" jdbcType="VARCHAR" />
+		<result column="arr_airport_terminal" property="arrAirportTerminal" jdbcType="VARCHAR" />
+		<result column="arr_country" property="arrCountry" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="rid != null"> and rid= #{rid}</if>	
+		<if test="carrier != null and carrier !=''"> and carrier= #{carrier}</if>
+		<if test="carrierName != null and carrierName !=''"> and carrier_name= #{carrierName}</if>
+		<if test="deptCityName != null and deptCityName !=''"> and dept_city_name= #{deptCityName}</if>
+		<if test="deptAirportName != null and deptAirportName !=''"> and dept_airport_name= #{deptAirportName}</if>
+		<if test="deptAirportTerminal != null and deptAirportTerminal !=''"> and dept_airport_terminal= #{deptAirportTerminal}</if>
+		<if test="deptCountry != null and deptCountry !=''"> and dept_country= #{deptCountry}</if>
+		<if test="arrCityName != null and arrCityName !=''"> and arr_city_name= #{arrCityName}</if>
+		<if test="arrAirportName != null and arrAirportName !=''"> and arr_airport_name= #{arrAirportName}</if>
+		<if test="arrAirportTerminal != null and arrAirportTerminal !=''"> and arr_airport_terminal= #{arrAirportTerminal}</if>
+		<if test="arrCountry != null and arrCountry !=''"> and arr_country= #{arrCountry}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		rid ,
+		carrier ,
+		carrier_name ,
+		dept_city_name ,
+		dept_airport_name ,
+		dept_airport_terminal ,
+		dept_country ,
+		arr_city_name ,
+		arr_airport_name ,
+		arr_airport_terminal ,
+		arr_country 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_mts_config
+		where
+		id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from schedule_mts_config
+		where
+		id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.ScheduleMtsConfig">
+		insert into schedule_mts_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="rid != null">rid,</if>	
+			<if test="carrier != null and carrier !=''">carrier,</if>
+			<if test="carrierName != null and carrierName !=''">carrier_name,</if>
+			<if test="deptCityName != null and deptCityName !=''">dept_city_name,</if>
+			<if test="deptAirportName != null and deptAirportName !=''">dept_airport_name,</if>
+			<if test="deptAirportTerminal != null and deptAirportTerminal !=''">dept_airport_terminal,</if>
+			<if test="deptCountry != null and deptCountry !=''">dept_country,</if>
+			<if test="arrCityName != null and arrCityName !=''">arr_city_name,</if>
+			<if test="arrAirportName != null and arrAirportName !=''">arr_airport_name,</if>
+			<if test="arrAirportTerminal != null and arrAirportTerminal !=''">arr_airport_terminal,</if>
+			<if test="arrCountry != null and arrCountry !=''">arr_country,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="rid != null">
+				#{rid,jdbcType=INTEGER},
+			</if>
+			<if test="carrier != null and carrier !=''">
+				#{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierName != null and carrierName !=''">
+				#{carrierName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptCityName != null and deptCityName !=''">
+				#{deptCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptAirportName != null and deptAirportName !=''">
+				#{deptAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptAirportTerminal != null and deptAirportTerminal !=''">
+				#{deptAirportTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="deptCountry != null and deptCountry !=''">
+				#{deptCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCityName != null and arrCityName !=''">
+				#{arrCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirportName != null and arrAirportName !=''">
+				#{arrAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirportTerminal != null and arrAirportTerminal !=''">
+				#{arrAirportTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCountry != null and arrCountry !=''">
+				#{arrCountry,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.ScheduleMtsConfig">
+		update schedule_mts_config
+		<set>
+			<if test="rid != null">
+				rid= #{rid,jdbcType=INTEGER},
+			</if>
+			<if test="carrier != null and carrier !=''">
+				carrier= #{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierName != null and carrierName !=''">
+				carrier_name= #{carrierName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptCityName != null and deptCityName !=''">
+				dept_city_name= #{deptCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptAirportName != null and deptAirportName !=''">
+				dept_airport_name= #{deptAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptAirportTerminal != null and deptAirportTerminal !=''">
+				dept_airport_terminal= #{deptAirportTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="deptCountry != null and deptCountry !=''">
+				dept_country= #{deptCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCityName != null and arrCityName !=''">
+				arr_city_name= #{arrCityName,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirportName != null and arrAirportName !=''">
+				arr_airport_name= #{arrAirportName,jdbcType=VARCHAR},
+			</if>
+			<if test="arrAirportTerminal != null and arrAirportTerminal !=''">
+				arr_airport_terminal= #{arrAirportTerminal,jdbcType=VARCHAR},
+			</if>
+			<if test="arrCountry != null and arrCountry !=''">
+				arr_country= #{arrCountry,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_mts_config where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from schedule_mts_config where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_mts_config where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_mts_config where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

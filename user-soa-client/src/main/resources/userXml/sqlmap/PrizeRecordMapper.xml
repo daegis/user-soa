@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PrizeRecordMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.PrizeRecord">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="sign_in_record_id" property="signInRecordId" jdbcType="BIGINT" />
+		<result column="active_id" property="activeId" jdbcType="BIGINT" />
+		<result column="lucky_draw_id" property="luckyDrawId" jdbcType="BIGINT" />
+		<result column="lottery_type" property="lotteryType" jdbcType="INTEGER" />
+		<result column="lottery_record" property="lotteryRecord" jdbcType="BIGINT" />
+		<result column="prize_id" property="prizeId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="product_type" property="productType" jdbcType="INTEGER" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="BIGINT" />
+		<result column="prize_pic" property="prizePic" jdbcType="VARCHAR" />
+		<result column="draw_status" property="drawStatus" jdbcType="INTEGER" />
+		<result column="contacts_name" property="contactsName" jdbcType="VARCHAR" />
+		<result column="contacts_phone" property="contactsPhone" jdbcType="VARCHAR" />
+		<result column="lottery_time" property="lotteryTime" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="draw_time" property="drawTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="signInRecordId != null"> and sign_in_record_id= #{signInRecordId}</if>	
+		<if test="activeId != null"> and active_id= #{activeId}</if>	
+		<if test="luckyDrawId != null"> and lucky_draw_id= #{luckyDrawId}</if>	
+		<if test="lotteryType != null"> and lottery_type= #{lotteryType}</if>	
+		<if test="lotteryRecord != null"> and lottery_record= #{lotteryRecord}</if>	
+		<if test="prizeId != null"> and prize_id= #{prizeId}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="productType != null"> and product_type= #{productType}</if>	
+		<if test="productName != null and productName !=''"> and product_name= #{productName}</if>
+		<if test="productId != null"> and product_id= #{productId}</if>	
+		<if test="prizePic != null and prizePic !=''"> and prize_pic= #{prizePic}</if>
+		<if test="drawStatus != null"> and draw_status= #{drawStatus}</if>	
+		<if test="contactsName != null and contactsName !=''"> and contacts_name= #{contactsName}</if>
+		<if test="contactsPhone != null and contactsPhone !=''"> and contacts_phone= #{contactsPhone}</if>
+		<if test="lotteryTime != null"> and lottery_time= #{lotteryTime}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="drawTime != null"> and draw_time= #{drawTime}</if>
+		<if test="ids != null "> 
+			and sign_in_record_id in
+			(${ids})
+		</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		sign_in_record_id ,
+		active_id ,
+		lucky_draw_id ,
+		lottery_type ,
+		lottery_record ,
+		prize_id ,
+		user_id ,
+		product_type ,
+		product_name ,
+		product_id ,
+		prize_pic ,
+		draw_status ,
+		contacts_name ,
+		contacts_phone ,
+		lottery_time ,
+		create_time ,
+		draw_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from prize_record
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from prize_record
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.PrizeRecord" useGeneratedKeys="true" keyProperty="id">
+		insert into prize_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="signInRecordId != null">sign_in_record_id,</if>	
+			<if test="activeId != null">active_id,</if>	
+			<if test="luckyDrawId != null">lucky_draw_id,</if>	
+			<if test="lotteryType != null">lottery_type,</if>	
+			<if test="lotteryRecord != null">lottery_record,</if>	
+			<if test="prizeId != null">prize_id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="productType != null">product_type,</if>	
+			<if test="productName != null and productName !=''">product_name,</if>
+			<if test="productId != null">product_id,</if>	
+			<if test="prizePic != null and prizePic !=''">prize_pic,</if>
+			<if test="drawStatus != null">draw_status,</if>	
+			<if test="contactsName != null and contactsName !=''">contacts_name,</if>
+			<if test="contactsPhone != null and contactsPhone !=''">contacts_phone,</if>
+			<if test="lotteryTime != null">lottery_time,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="drawTime != null">draw_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="signInRecordId != null">
+				#{signInRecordId,jdbcType=BIGINT},
+			</if>
+			<if test="activeId != null">
+				#{activeId,jdbcType=BIGINT},
+			</if>
+			<if test="luckyDrawId != null">
+				#{luckyDrawId,jdbcType=BIGINT},
+			</if>
+			<if test="lotteryType != null">
+				#{lotteryType,jdbcType=INTEGER},
+			</if>
+			<if test="lotteryRecord != null">
+				#{lotteryRecord,jdbcType=BIGINT},
+			</if>
+			<if test="prizeId != null">
+				#{prizeId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="productType != null">
+				#{productType,jdbcType=INTEGER},
+			</if>
+			<if test="productName != null and productName !=''">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=BIGINT},
+			</if>
+			<if test="prizePic != null and prizePic !=''">
+				#{prizePic,jdbcType=VARCHAR},
+			</if>
+			<if test="drawStatus != null">
+				#{drawStatus,jdbcType=INTEGER},
+			</if>
+			<if test="contactsName != null and contactsName !=''">
+				#{contactsName,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsPhone != null and contactsPhone !=''">
+				#{contactsPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="lotteryTime != null">
+				#{lotteryTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="drawTime != null">
+				#{drawTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.PrizeRecord">
+		update prize_record
+		<set>
+			<if test="signInRecordId != null">
+				sign_in_record_id= #{signInRecordId,jdbcType=BIGINT},
+			</if>
+			<if test="activeId != null">
+				active_id= #{activeId,jdbcType=BIGINT},
+			</if>
+			<if test="luckyDrawId != null">
+				lucky_draw_id= #{luckyDrawId,jdbcType=BIGINT},
+			</if>
+			<if test="lotteryType != null">
+				lottery_type= #{lotteryType,jdbcType=INTEGER},
+			</if>
+			<if test="lotteryRecord != null">
+				lottery_record= #{lotteryRecord,jdbcType=BIGINT},
+			</if>
+			<if test="prizeId != null">
+				prize_id= #{prizeId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="productType != null">
+				product_type= #{productType,jdbcType=INTEGER},
+			</if>
+			<if test="productName != null and productName !=''">
+				product_name= #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id= #{productId,jdbcType=BIGINT},
+			</if>
+			<if test="prizePic != null and prizePic !=''">
+				prize_pic= #{prizePic,jdbcType=VARCHAR},
+			</if>
+			<if test="drawStatus != null">
+				draw_status= #{drawStatus,jdbcType=INTEGER},
+			</if>
+			<if test="contactsName != null and contactsName !=''">
+				contacts_name= #{contactsName,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsPhone != null and contactsPhone !=''">
+				contacts_phone= #{contactsPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="lotteryTime != null">
+				lottery_time= #{lotteryTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="drawTime != null">
+				draw_time= #{drawTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from prize_record where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from prize_record where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from prize_record where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from prize_record where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="queryPrizeRecordListByIds" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from prize_record where id in
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<include refid="Base_Where" />
+	</select>
+	<select id="getPrizeRecord" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from prize_record 
+		where 1=1 
+		and user_id = #{userId}
+		and lottery_type = #{lotteryType}
+		and create_time <![CDATA[>=]]> #{dayStart}
+		and create_time <![CDATA[<=]]> #{dayEnd}
+	</select>
+</mapper>

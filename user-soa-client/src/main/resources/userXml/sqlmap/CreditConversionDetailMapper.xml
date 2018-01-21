@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CreditConversionDetailMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CreditConversionDetail">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="partner_id" property="partnerId" jdbcType="INTEGER" />
+		<result column="bill_id" property="billId" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="hiapp_count" property="hiappCount" jdbcType="BIGINT" />
+		<result column="partner_count" property="partnerCount" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+		<result column="partner_desc" property="partnerDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="partnerId != null"> and partner_id= #{partnerId}</if>	
+		<if test="billId != null"> and bill_id= #{billId}</if>	
+		<if test="type != null"> and type= #{type}</if>	
+		<if test="hiappCount != null"> and hiapp_count= #{hiappCount}</if>	
+		<if test="partnerCount != null"> and partner_count= #{partnerCount}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="tradeNo != null"> and trade_no= #{tradeNo}</if>
+		<if test="partnerDesc != null"> and partner_desc= #{partnerDesc}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		user_id ,
+		partner_id ,
+		bill_id ,
+		type ,
+		hiapp_count ,
+		partner_count ,
+		create_time ,
+		trade_no ,
+		partner_desc
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from credit_conversion_detail
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from credit_conversion_detail
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CreditConversionDetail">
+		insert into credit_conversion_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="partnerId != null">partner_id,</if>	
+			<if test="billId != null">bill_id,</if>	
+			<if test="type != null">type,</if>	
+			<if test="hiappCount != null">hiapp_count,</if>	
+			<if test="partnerCount != null">partner_count,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="tradeNo != null">trade_no,</if>	
+			<if test="partnerDesc != null">partner_desc,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="partnerId != null">
+				#{partnerId,jdbcType=INTEGER},
+			</if>
+			<if test="billId != null">
+				#{billId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="hiappCount != null">
+				#{hiappCount,jdbcType=BIGINT},
+			</if>
+			<if test="partnerCount != null">
+				#{partnerCount,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tradeNo != null">
+				#{tradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="partnerDesc != null">
+				#{partnerDesc,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CreditConversionDetail">
+		update credit_conversion_detail
+		<set>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="partnerId != null">
+				partner_id= #{partnerId,jdbcType=INTEGER},
+			</if>
+			<if test="billId != null">
+				bill_id= #{billId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				type= #{type,jdbcType=INTEGER},
+			</if>
+			<if test="hiappCount != null">
+				hiapp_count= #{hiappCount,jdbcType=BIGINT},
+			</if>
+			<if test="partnerCount != null">
+				partner_count= #{partnerCount,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="tradeNo != null">
+				trade_no= #{tradeNo,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerDesc != null">
+				partner_desc= #{partnerDesc,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_conversion_detail where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from credit_conversion_detail where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_conversion_detail where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from credit_conversion_detail where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

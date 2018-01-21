@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserLocationUsualMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.UserLocationUsual">
+		<id column="usual_location_id" property="usualLocationId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="usual_location_type" property="usualLocationType" jdbcType="SMALLINT" />
+		<result column="city_id" property="cityId" jdbcType="BIGINT" />
+		<result column="destination_id" property="destinationId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="usualLocationId != null"> and usual_location_id= #{usualLocationId}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="usualLocationType != null"> and usual_location_type= #{usualLocationType}</if>	
+		<if test="cityId != null"> and city_id= #{cityId}</if>	
+		<if test="destinationId != null"> and destination_id= #{destinationId}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="lastModifyTime != null"> and last_modify_time= #{lastModifyTime}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		usual_location_id ,
+		user_id ,
+		usual_location_type ,
+		city_id ,
+		destination_id ,
+		create_time ,
+		last_modify_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_location_usual
+		where
+		usual_location_id = #{usualLocationId,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user_location_usual
+		where
+		usual_location_id = #{usualLocationId,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.UserLocationUsual">
+		insert into user_location_usual
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usualLocationId != null">usual_location_id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="usualLocationType != null">usual_location_type,</if>	
+			<if test="cityId != null">city_id,</if>	
+			<if test="destinationId != null">destination_id,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="lastModifyTime != null">last_modify_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="usualLocationId != null">
+				#{usualLocationId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="usualLocationType != null">
+				#{usualLocationType,jdbcType=SMALLINT},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=BIGINT},
+			</if>
+			<if test="destinationId != null">
+				#{destinationId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.UserLocationUsual">
+		update user_location_usual
+		<set>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="usualLocationType != null">
+				usual_location_type= #{usualLocationType,jdbcType=SMALLINT},
+			</if>
+			<if test="cityId != null">
+				city_id= #{cityId,jdbcType=BIGINT},
+			</if>
+			<if test="destinationId != null">
+				destination_id= #{destinationId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		usual_location_id = #{usualLocationId,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_location_usual where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from user_location_usual where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_location_usual where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_location_usual where usual_location_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

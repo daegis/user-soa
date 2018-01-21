@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CreditPartnerMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CreditPartner">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="partner_id" property="partnerId" jdbcType="INTEGER" />
+		<result column="partner_name" property="partnerName" jdbcType="VARCHAR" />
+		<result column="icon" property="icon" jdbcType="VARCHAR" />
+		<result column="in_multiplier" property="inMultiplier" jdbcType="DECIMAL" />
+		<result column="in_divisor" property="inDivisor" jdbcType="DECIMAL" />
+		<result column="out_multiplier" property="outMultiplier" jdbcType="DECIMAL" />
+		<result column="out_divisor" property="outDivisor" jdbcType="DECIMAL" />
+		<result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="partnerId != null"> and partner_id= #{partnerId}</if>	
+		<if test="partnerName != null and partnerName !=''"> and partner_name= #{partnerName}</if>
+		<if test="icon != null and icon !=''"> and icon= #{icon}</if>
+		<if test="inMultiplier != null"> and in_multiplier= #{inMultiplier}</if>	
+		<if test="inDivisor != null"> and in_divisor= #{inDivisor}</if>	
+		<if test="outMultiplier != null"> and out_multiplier= #{outMultiplier}</if>	
+		<if test="outDivisor != null"> and out_divisor= #{outDivisor}</if>	
+		<if test="startDate != null"> and start_date= #{startDate}</if>	
+		<if test="endDate != null"> and end_date= #{endDate}</if>	
+		<if test="currentTime != null"> and start_date<![CDATA[<=]]> #{currentTime} and end_date<![CDATA[>=]]> #{currentTime}</if>
+		<if test="status != null"> and status= #{status}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		partner_id ,
+		partner_name ,
+		icon ,
+		in_multiplier ,
+		in_divisor ,
+		out_multiplier ,
+		out_divisor ,
+		start_date ,
+		end_date ,
+		status ,
+		description
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from credit_partner
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from credit_partner
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CreditPartner">
+		insert into credit_partner
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="partnerId != null">partner_id,</if>	
+			<if test="partnerName != null and partnerName !=''">partner_name,</if>
+			<if test="icon != null and icon !=''">icon,</if>
+			<if test="inMultiplier != null">in_multiplier,</if>	
+			<if test="inDivisor != null">in_divisor,</if>	
+			<if test="outMultiplier != null">out_multiplier,</if>	
+			<if test="outDivisor != null">out_divisor,</if>	
+			<if test="startDate != null">start_date,</if>	
+			<if test="endDate != null">end_date,</if>	
+			<if test="status != null">status,</if>	
+			<if test="description != null and description!=''">description,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="partnerId != null">
+				#{partnerId,jdbcType=INTEGER},
+			</if>
+			<if test="partnerName != null and partnerName !=''">
+				#{partnerName,jdbcType=VARCHAR},
+			</if>
+			<if test="icon != null and icon !=''">
+				#{icon,jdbcType=VARCHAR},
+			</if>
+			<if test="inMultiplier != null">
+				#{inMultiplier,jdbcType=DECIMAL},
+			</if>
+			<if test="inDivisor != null">
+				#{inDivisor,jdbcType=DECIMAL},
+			</if>
+			<if test="outMultiplier != null">
+				#{outMultiplier,jdbcType=DECIMAL},
+			</if>
+			<if test="outDivisor != null">
+				#{outDivisor,jdbcType=DECIMAL},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="description != null and description!=''">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CreditPartner">
+		update credit_partner
+		<set>
+			<if test="partnerId != null">
+				partner_id= #{partnerId,jdbcType=INTEGER},
+			</if>
+			<if test="partnerName != null and partnerName !=''">
+				partner_name= #{partnerName,jdbcType=VARCHAR},
+			</if>
+			<if test="icon != null and icon !=''">
+				icon= #{icon,jdbcType=VARCHAR},
+			</if>
+			<if test="inMultiplier != null">
+				in_multiplier= #{inMultiplier,jdbcType=DECIMAL},
+			</if>
+			<if test="inDivisor != null">
+				in_divisor= #{inDivisor,jdbcType=DECIMAL},
+			</if>
+			<if test="outMultiplier != null">
+				out_multiplier= #{outMultiplier,jdbcType=DECIMAL},
+			</if>
+			<if test="outDivisor != null">
+				out_divisor= #{outDivisor,jdbcType=DECIMAL},
+			</if>
+			<if test="startDate != null">
+				start_date= #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null">
+				end_date= #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status= #{status,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				description= #{description,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_partner where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from credit_partner where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from credit_partner where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from credit_partner where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

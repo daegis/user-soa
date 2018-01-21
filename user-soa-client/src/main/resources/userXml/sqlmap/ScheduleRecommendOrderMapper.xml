@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ScheduleRecommendOrderMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.ScheduleRecommendOrder">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="ttl" property="ttl" jdbcType="INTEGER" />
+		<result column="tol" property="tol" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="weight" property="weight" jdbcType="INTEGER" />
+		<result column="in_use" property="inUse" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="ttl != null"> and ttl= #{ttl}</if>	
+		<if test="tol != null"> and tol= #{tol}</if>	
+		<if test="name != null and name !=''"> and name= #{name}</if>
+		<if test="weight != null"> and weight= #{weight}</if>	
+		<if test="inUse != null"> and in_use= #{inUse}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		ttl ,
+		tol ,
+		name ,
+		weight ,
+		in_use 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_recommend_order
+		where
+		id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from schedule_recommend_order
+		where
+		id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.ScheduleRecommendOrder">
+		insert into schedule_recommend_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="ttl != null">ttl,</if>	
+			<if test="tol != null">tol,</if>	
+			<if test="name != null and name !=''">name,</if>
+			<if test="weight != null">weight,</if>	
+			<if test="inUse != null">in_use,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="ttl != null">
+				#{ttl,jdbcType=INTEGER},
+			</if>
+			<if test="tol != null">
+				#{tol,jdbcType=INTEGER},
+			</if>
+			<if test="name != null and name !=''">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				#{weight,jdbcType=INTEGER},
+			</if>
+			<if test="inUse != null">
+				#{inUse,jdbcType=INTEGER},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.ScheduleRecommendOrder">
+		update schedule_recommend_order
+		<set>
+			<if test="ttl != null">
+				ttl= #{ttl,jdbcType=INTEGER},
+			</if>
+			<if test="tol != null">
+				tol= #{tol,jdbcType=INTEGER},
+			</if>
+			<if test="name != null and name !=''">
+				name= #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="weight != null">
+				weight= #{weight,jdbcType=INTEGER},
+			</if>
+			<if test="inUse != null">
+				in_use= #{inUse,jdbcType=INTEGER}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_recommend_order where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from schedule_recommend_order where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_recommend_order where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_recommend_order where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

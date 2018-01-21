@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CommonIdtypeMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CommonIdtype">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="contacts_id" property="contactsId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="id_no" property="idNo" jdbcType="VARCHAR" />
+		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
+		<result column="term_of_validity" property="termOfValidity" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="contactsId != null"> and contacts_id= #{contactsId}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="type != null and type !=''"> and type= #{type}</if>
+		<if test="idNo != null and idNo !=''"> and id_no= #{idNo}</if>
+		<if test="typeName != null and typeName !=''"> and type_name= #{typeName}</if>
+		<if test="termOfValidity != null"> and term_of_validity= #{termOfValidity}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="lastModifyTime != null"> and last_modify_time= #{lastModifyTime}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		contacts_id ,
+		user_id ,
+		type ,
+		id_no ,
+		type_name,
+		term_of_validity,
+		create_time ,
+		last_modify_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from common_idtype
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from common_idtype
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+	
+	<delete id="deleteByContactsId" parameterType="java.lang.Long">
+		delete from common_idtype
+		where 1=1
+		<include refid="Base_Where" />
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CommonIdtype"   useGeneratedKeys="true"  keyProperty="id">
+		insert into common_idtype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="contactsId != null">contacts_id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="type != null and type !=''">type,</if>
+			<if test="idNo != null and idNo !=''">id_no,</if>
+			<if test="typeName != null and typeName !=''">type_name,</if>
+			<if test="termOfValidity != null">term_of_validity,</if>
+			<if test="createTime != null">create_time,</if>	
+			<if test="lastModifyTime != null">last_modify_time,</if>		
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="contactsId != null">
+				#{contactsId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null and type !=''">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="idNo != null and idNo !=''">
+				#{idNo,jdbcType=VARCHAR},
+			</if>
+			<if test="typeName != null and typeName !=''">
+				#{typeName,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="termOfValidity != null">
+				#{termOfValidity,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CommonIdtype">
+		update common_idtype
+		<set>
+			<if test="contactsId != null">
+				contacts_id= #{contactsId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null and type !=''">
+				type= #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="idNo != null and idNo !=''">
+				id_no= #{idNo,jdbcType=VARCHAR},
+			</if>
+			<if test="typeName != null and typeName !=''">
+				type_name= #{typeName,jdbcType=VARCHAR},
+			</if>
+			<if test="termOfValidity != null">
+				term_of_validity= #{termOfValidity,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from common_idtype where 1=1
+		<include refid="Base_Where" /> order by last_modify_time desc
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from common_idtype where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from common_idtype where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from common_idtype where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		
+		order by last_modify_time desc
+	</select>
+	
+	<select id="selectByContactsIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from common_idtype where contacts_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		
+		order by last_modify_time desc
+	</select>
+
+</mapper>

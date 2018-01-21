@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="AttentionMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.Attention">
+		<id column="attention_id" property="attentionId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="attention_user_id" property="attentionUserId" jdbcType="BIGINT" />
+		<result column="is_mutual_attention" property="isMutualAttention" jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="attentionId != null"> and attention_id= #{attentionId}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="attentionUserId != null"> and attention_user_id= #{attentionUserId}</if>
+		<if test="isMutualAttention != null"> and is_mutual_attention= #{isMutualAttention}</if>		
+		<if test="createTime != null"><![CDATA[ and create_time< #{createTime}]]></if>	
+		<if test="order != null">order by create_time desc</if>
+		<if test="pageSize != null">limit #{pageSize}</if>
+		
+	</sql>
+	<sql id="Base_Column_List">
+		attention_id ,
+		user_id ,
+		attention_user_id ,
+		is_mutual_attention,
+		create_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from attention
+		where
+		attention_id = #{attentionId,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from attention
+		where
+		attention_id = #{attentionId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByMap" parameterType="java.lang.Long">
+		delete from attention
+		where 1=1 
+		<include refid="Base_Where" />
+	</delete>
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.Attention">
+		insert into attention
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="attentionId != null">attention_id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="attentionUserId != null">attention_user_id,</if>
+			<if test="isMutualAttention != null">is_mutual_attention,</if>
+			<if test="createTime != null">create_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="attentionId != null">
+				#{attentionId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="attentionUserId != null">
+				#{attentionUserId,jdbcType=BIGINT},
+			</if>
+			<if test="isMutualAttention != null">
+				#{isMutualAttention,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.Attention">
+		update attention
+		<set>
+			
+			<if test="isMutualAttention != null">
+				is_mutual_attention= #{isMutualAttention,jdbcType=TINYINT},
+			</if>
+			
+		</set>
+		where
+		attention_id = #{attentionId,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from attention where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from attention where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from attention where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from attention where attention_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+
+	<select id="selectByUserIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from attention where attention_user_id in
+		<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+		<include refid="Base_Where" />
+	</select>
+</mapper>

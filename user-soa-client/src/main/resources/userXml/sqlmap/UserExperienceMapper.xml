@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserExperienceMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.UserExperience">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="change_num" property="changeNum" jdbcType="INTEGER" />
+		<result column="change_type" property="changeType" jdbcType="INTEGER" />
+		<result column="change_from" property="changeFrom" jdbcType="VARCHAR" />
+		<result column="change_from_no" property="changeFromNo" jdbcType="VARCHAR" />
+		<result column="change_relation_no" property="changeRelationNo" jdbcType="VARCHAR" />
+		<result column="change_desc" property="changeDesc" jdbcType="VARCHAR" />
+		<result column="device_type" property="deviceType" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="changeNum != null"> and change_num= #{changeNum}</if>	
+		<if test="changeType != null"> and change_type= #{changeType}</if>	
+		<if test="changeFrom != null and changeFrom !=''"> and change_from= #{changeFrom}</if>
+		<if test="changeFromNo != null and changeFromNo !=''"> and change_from_no= #{changeFromNo}</if>
+		<if test="changeRelationNo != null and changeRelationNo !=''"> and change_relation_no= #{changeRelationNo}</if>
+		<if test="changeDesc != null and changeDesc !=''"> and change_desc= #{changeDesc}</if>
+		<if test="deviceType != null"> and device_type= #{deviceType}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="lastModifyTime != null"> and last_modify_time= #{lastModifyTime}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		user_id ,
+		change_num ,
+		change_type ,
+		change_from ,
+		change_from_no ,
+		change_relation_no ,
+		change_desc ,
+		device_type ,
+		create_time ,
+		last_modify_time 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_experience
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user_experience
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.UserExperience">
+		insert into user_experience
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="changeNum != null">change_num,</if>	
+			<if test="changeType != null">change_type,</if>	
+			<if test="changeFrom != null and changeFrom !=''">change_from,</if>
+			<if test="changeFromNo != null and changeFromNo !=''">change_from_no,</if>
+			<if test="changeRelationNo != null and changeRelationNo !=''">change_relation_no,</if>
+			<if test="changeDesc != null and changeDesc !=''">change_desc,</if>
+			<if test="deviceType != null">device_type,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="lastModifyTime != null">last_modify_time,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="changeNum != null">
+				#{changeNum,jdbcType=INTEGER},
+			</if>
+			<if test="changeType != null">
+				#{changeType,jdbcType=INTEGER},
+			</if>
+			<if test="changeFrom != null and changeFrom !=''">
+				#{changeFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="changeFromNo != null and changeFromNo !=''">
+				#{changeFromNo,jdbcType=VARCHAR},
+			</if>
+			<if test="changeRelationNo != null and changeRelationNo !=''">
+				#{changeRelationNo,jdbcType=VARCHAR},
+			</if>
+			<if test="changeDesc != null and changeDesc !=''">
+				#{changeDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.UserExperience">
+		update user_experience
+		<set>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="changeNum != null">
+				change_num= #{changeNum,jdbcType=INTEGER},
+			</if>
+			<if test="changeType != null">
+				change_type= #{changeType,jdbcType=INTEGER},
+			</if>
+			<if test="changeFrom != null and changeFrom !=''">
+				change_from= #{changeFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="changeFromNo != null and changeFromNo !=''">
+				change_from_no= #{changeFromNo,jdbcType=VARCHAR},
+			</if>
+			<if test="changeRelationNo != null and changeRelationNo !=''">
+				change_relation_no= #{changeRelationNo,jdbcType=VARCHAR},
+			</if>
+			<if test="changeDesc != null and changeDesc !=''">
+				change_desc= #{changeDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				device_type= #{deviceType,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_experience where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from user_experience where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_experience where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_experience where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

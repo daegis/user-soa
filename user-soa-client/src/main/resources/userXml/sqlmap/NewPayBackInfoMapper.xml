@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="NewPayBackInfoMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.NewPayBackInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="identity_confirm_id" property="identityConfirmId" jdbcType="BIGINT" />
+		<result column="orderID" property="orderId" jdbcType="VARCHAR" />
+		<result column="submitTime" property="submitTime" jdbcType="VARCHAR" />
+		<result column="payType" property="payType" jdbcType="SMALLINT" />
+		<result column="realName" property="realName" jdbcType="VARCHAR" />
+		<result column="idNumber" property="idNumber" jdbcType="VARCHAR" />
+		<result column="noticeUrl" property="noticeUrl" jdbcType="VARCHAR" />
+		<result column="partnerID" property="partnerId" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="charset" property="charset" jdbcType="VARCHAR" />
+		<result column="resultCode" property="resultCode" jdbcType="VARCHAR" />
+		<result column="acceptTime" property="acceptTime" jdbcType="VARCHAR" />
+		<result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />
+		<result column="feeAmt" property="feeAmt" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="identityConfirmId != null"> and identity_confirm_id= #{identityConfirmId}</if>	
+		<if test="orderId != null and orderId !=''"> and orderID= #{orderId}</if>
+		<if test="submitTime != null and submitTime !=''"> and submitTime= #{submitTime}</if>
+		<if test="payType != null"> and payType= #{payType}</if>	
+		<if test="realName != null and realName !=''"> and realName= #{realName}</if>
+		<if test="idNumber != null and idNumber !=''"> and idNumber= #{idNumber}</if>
+		<if test="noticeUrl != null and noticeUrl !=''"> and noticeUrl= #{noticeUrl}</if>
+		<if test="partnerId != null and partnerId !=''"> and partnerID= #{partnerId}</if>
+		<if test="remark != null and remark !=''"> and remark= #{remark}</if>
+		<if test="charset != null and charset !=''"> and charset= #{charset}</if>
+		<if test="resultCode != null and resultCode != ''"> and resultCode= #{resultCode}</if>	
+		<if test="acceptTime != null and acceptTime !=''"> and acceptTime= #{acceptTime}</if>
+		<if test="orderNo != null and orderNo !=''"> and orderNo= #{orderNo}</if>
+		<if test="photo != null and photo !=''"> and photo= #{photo}</if>
+		<if test="feeAmt != null and feeAmt !=''"> and feeAmt= #{feeAmt}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		identity_confirm_id ,
+		orderID ,
+		submitTime ,
+		payType ,
+		realName ,
+		idNumber ,
+		noticeUrl ,
+		partnerID ,
+		remark ,
+		charset ,
+		resultCode ,
+		acceptTime ,
+		orderNo ,
+		photo ,
+		feeAmt 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from new_pay_back_info
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from new_pay_back_info
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.NewPayBackInfo">
+		insert into new_pay_back_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="identityConfirmId != null">identity_confirm_id,</if>	
+			<if test="orderId != null and orderId !=''">orderID,</if>
+			<if test="submitTime != null and submitTime !=''">submitTime,</if>
+			<if test="payType != null">payType,</if>	
+			<if test="realName != null and realName !=''">realName,</if>
+			<if test="idNumber != null and idNumber !=''">idNumber,</if>
+			<if test="noticeUrl != null and noticeUrl !=''">noticeUrl,</if>
+			<if test="partnerId != null and partnerId !=''">partnerID,</if>
+			<if test="remark != null and remark !=''">remark,</if>
+			<if test="charset != null and charset !=''">charset,</if>
+			<if test="resultCode != null and resultCode != ''">resultCode,</if>	
+			<if test="acceptTime != null and acceptTime !=''">acceptTime,</if>
+			<if test="orderNo != null and orderNo !=''">orderNo,</if>
+			<if test="photo != null and photo !=''">photo,</if>
+			<if test="feeAmt != null and feeAmt !=''">feeAmt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="identityConfirmId != null">
+				#{identityConfirmId,jdbcType=BIGINT},
+			</if>
+			<if test="orderId != null and orderId !=''">
+				#{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="submitTime != null and submitTime !=''">
+				#{submitTime,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				#{payType,jdbcType=SMALLINT},
+			</if>
+			<if test="realName != null and realName !=''">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="idNumber != null and idNumber !=''">
+				#{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="noticeUrl != null and noticeUrl !=''">
+				#{noticeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="partnerId != null and partnerId !=''">
+				#{partnerId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark !=''">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="charset != null and charset !=''">
+				#{charset,jdbcType=VARCHAR},
+			</if>
+			<if test="resultCode != null">
+				#{resultCode,jdbcType=VARCHAR},
+			</if>
+			<if test="acceptTime != null and acceptTime !=''">
+				#{acceptTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo !=''">
+				#{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="photo != null and photo !=''">
+				#{photo,jdbcType=VARCHAR},
+			</if>
+			<if test="feeAmt != null and feeAmt !=''">
+				#{feeAmt,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.NewPayBackInfo">
+		update new_pay_back_info
+		<set>
+			<if test="identityConfirmId != null">
+				identity_confirm_id= #{identityConfirmId,jdbcType=BIGINT},
+			</if>
+			<if test="orderId != null and orderId !=''">
+				orderID= #{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="submitTime != null and submitTime !=''">
+				submitTime= #{submitTime,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				payType= #{payType,jdbcType=SMALLINT},
+			</if>
+			<if test="realName != null and realName !=''">
+				realName= #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="idNumber != null and idNumber !=''">
+				idNumber= #{idNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="noticeUrl != null and noticeUrl !=''">
+				noticeUrl= #{noticeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="partnerId != null and partnerId !=''">
+				partnerID= #{partnerId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark !=''">
+				remark= #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="charset != null and charset !=''">
+				charset= #{charset,jdbcType=VARCHAR},
+			</if>
+			<if test="resultCode != null">
+				resultCode= #{resultCode,jdbcType=VARCHAR},
+			</if>
+			<if test="acceptTime != null and acceptTime !=''">
+				acceptTime= #{acceptTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo !=''">
+				orderNo= #{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="photo != null and photo !=''">
+				photo= #{photo,jdbcType=VARCHAR},
+			</if>
+			<if test="feeAmt != null and feeAmt !=''">
+				feeAmt= #{feeAmt,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from new_pay_back_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from new_pay_back_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from new_pay_back_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from new_pay_back_info where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

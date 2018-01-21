@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserIdGenMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.UserIdGen">
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.UserIdGen" useGeneratedKeys="true" keyProperty="user_id">
+		insert into user_id_gen
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">user_id,</if>	
+			<if test="createDate != null">create_date,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+		<selectKey resultType="long" keyProperty="userId" order="AFTER">
+        	<![CDATA[
+        		SELECT LAST_INSERT_ID() AS userId 
+        	]]>
+        </selectKey>
+	</insert>
+
+
+</mapper>

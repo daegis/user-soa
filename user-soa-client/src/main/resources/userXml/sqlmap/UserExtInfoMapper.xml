@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserExtInfoMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.UserExtInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="fans_count" property="fansCount" jdbcType="INTEGER" />
+		<result column="attention_count" property="attentionCount" jdbcType="INTEGER" />
+    	<result column="receive_praise_count" property="receivePraiseCount" jdbcType="INTEGER" />
+    	<result column="receive_collect_count" property="receiveCollectCount" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="post_count" property="postCount" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="last_app_version" property="lastAppVersion" jdbcType="VARCHAR" />
+		<result column="last_channel" property="lastChannel" jdbcType="VARCHAR" />
+		<result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>
+		<if test="fansCount != null"> and fans_count= #{fansCount}</if>
+		<if test="attentionCount != null"> and attention_count= #{attentionCount}</if>
+	    <if test="receivePraiseCount != null" > and receive_praise_count=#{receivePraiseCount} </if>
+    	<if test="receiveCollectCount != null" > and receive_collect_count=#{receiveCollectCount} </if>
+		<if test="userId != null"> and user_id= #{userId}</if>
+		<if test="postCount != null"> and post_count= #{postCount}</if>
+		<if test="createDate != null"> and create_date= #{createDate}</if>
+		<if test="lastAppVersion != null and lastAppVersion !=''"> and last_app_version= #{lastAppVersion}</if>
+		<if test="lastChannel != null and lastChannel !=''"> and last_channel= #{lastChannel}</if>		
+		<if test="modifyDate != null"> and modify_date= #{modifyDate}</if>
+	</sql>
+	<sql id="Base_Column_List">
+	    id, fans_count, attention_count, receive_praise_count, receive_collect_count, user_id, 
+	    post_count, create_date, modify_date,last_app_version ,last_channel
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user_ext_info
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert" parameterType="com.hnair.consumer.user.model.UserExtInfo" >
+	    insert into user_ext_info (id, fans_count, attention_count, 
+	      receive_praise_count, receive_collect_count, 
+	      user_id, post_count, create_date, last_app_version, last_channel,
+	      modify_date)
+	    values (#{id,jdbcType=BIGINT}, #{fansCount,jdbcType=INTEGER}, #{attentionCount,jdbcType=INTEGER}, 
+	      #{receivePraiseCount,jdbcType=INTEGER}, #{receiveCollectCount,jdbcType=INTEGER}, 
+	      #{userId,jdbcType=BIGINT}, #{postCount,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{lastAppVersion,jdbcType=VARCHAR}, #{lastChannel,jdbcType=VARCHAR},
+	      #{modifyDate,jdbcType=TIMESTAMP})
+	  </insert>
+  	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.UserExtInfo" >
+	    insert into user_ext_info
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        id,
+	      </if>
+	      <if test="fansCount != null" >
+	        fans_count,
+	      </if>
+	      <if test="attentionCount != null" >
+	        attention_count,
+	      </if>
+	      <if test="receivePraiseCount != null" >
+	        receive_praise_count,
+	      </if>
+	      <if test="receiveCollectCount != null" >
+	        receive_collect_count,
+	      </if>
+	      <if test="userId != null" >
+	        user_id,
+	      </if>
+	      <if test="postCount != null" >
+	        post_count,
+	      </if>
+	      <if test="createDate != null" >
+	        create_date,
+	      </if>
+	      <if test="modifyDate != null" >
+	        modify_date,
+	      </if>
+			<if test="lastAppVersion != null and lastAppVersion !=''">last_app_version,</if>
+			<if test="lastChannel != null and lastChannel !=''">last_channel,</if>	      
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=BIGINT},
+	      </if>
+	      <if test="fansCount != null" >
+	        #{fansCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="attentionCount != null" >
+	        #{attentionCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="receivePraiseCount != null" >
+	        #{receivePraiseCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="receiveCollectCount != null" >
+	        #{receiveCollectCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="userId != null" >
+	        #{userId,jdbcType=BIGINT},
+	      </if>
+	      <if test="postCount != null" >
+	        #{postCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="createDate != null" >
+	        #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="modifyDate != null" >
+	        #{modifyDate,jdbcType=TIMESTAMP},
+	      </if>
+			<if test="lastAppVersion != null and lastAppVersion !=''">
+				#{lastAppVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="lastChannel != null and lastChannel !=''">
+				#{lastChannel,jdbcType=VARCHAR},
+			</if>	      
+	    </trim>
+  	</insert>
+  	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.UserExtInfo" >
+	    update user_ext_info
+	    <set >
+	      <if test="fansCount != null" >
+	        fans_count = #{fansCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="attentionCount != null" >
+	        attention_count = #{attentionCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="receivePraiseCount != null" >
+	        receive_praise_count = #{receivePraiseCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="receiveCollectCount != null" >
+	        receive_collect_count = #{receiveCollectCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="userId != null" >
+	        user_id = #{userId,jdbcType=BIGINT},
+	      </if>
+	      <if test="postCount != null" >
+	        post_count = #{postCount,jdbcType=INTEGER},
+	      </if>
+	      <if test="createDate != null" >
+	        create_date = #{createDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="modifyDate != null" >
+	        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+	      </if>
+			<if test="lastAppVersion != null and lastAppVersion !=''">
+				last_app_version= #{lastAppVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="lastChannel != null and lastChannel !=''">
+				last_channel= #{lastChannel,jdbcType=VARCHAR}
+			</if>	      
+	    </set>
+	    where id = #{id,jdbcType=BIGINT}
+	</update>
+  	<update id="updateByPrimaryKey" parameterType="com.hnair.consumer.user.model.UserExtInfo" >
+	    update user_ext_info
+	    set fans_count = #{fansCount,jdbcType=INTEGER},
+	      attention_count = #{attentionCount,jdbcType=INTEGER},
+	      receive_praise_count = #{receivePraiseCount,jdbcType=INTEGER},
+	      receive_collect_count = #{receiveCollectCount,jdbcType=INTEGER},
+	      user_id = #{userId,jdbcType=BIGINT},
+	      post_count = #{postCount,jdbcType=INTEGER},
+	      create_date = #{createDate,jdbcType=TIMESTAMP},
+	      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+	      last_app_version= #{lastAppVersion,jdbcType=VARCHAR},
+	      last_channel= #{lastChannel,jdbcType=VARCHAR}
+	    where id = #{id,jdbcType=BIGINT}
+  	</update>
+  	<update id="updateLastAppVersion" parameterType="map">
+	    update user_ext_info
+	    set 	      
+	      modify_date = now(),
+	      last_app_version= #{lastAppVersion,jdbcType=VARCHAR},
+	      last_channel= #{lastChannel,jdbcType=VARCHAR}
+	    where user_id = #{userId,jdbcType=BIGINT}
+  	</update>  
+  	
+  	<update id="updateVersionByUserIds" parameterType="map">
+	    update user_ext_info
+	    set 	      
+	      modify_date = now(),
+	      last_app_version= #{lastAppVersion,jdbcType=VARCHAR},
+	      last_channel= #{lastChannel,jdbcType=VARCHAR}
+	    where user_id in
+		<foreach item="item" index="index" collection="userIdsList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+  	</update>   	
+  		
+	<select id="getByUserIds" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info where user_id in 
+		<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from user_ext_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getUserListByUserIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info where user_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getUsersByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_ext_info where user_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+		insert into user_ext_info (fans_count,attention_count, receive_praise_count, receive_collect_count,user_id,post_count,create_date,modify_date, last_app_version, last_channel)
+		values
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.fansCount},#{item.attentionCount},#{item.receivePraiseCount},#{item.receiveCollectCount},#{item.userId},#{item.postCount},#{item.createDate},#{item.modifyDate}, #{item.lastAppVersion}, #{item.lastChannel})
+		</foreach>
+	</insert>
+
+
+
+	<!--批量进行更新-->
+	<update id="batchUpdate" parameterType="java.util.List">
+		update user_ext_info set
+		fans_count=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.fansCount}
+		</foreach>
+		,attention_count=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.attentionCount}
+		</foreach>
+		,receive_praise_count=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.receivePraiseCount}
+		</foreach>
+		,receive_collect_count=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.receiveCollectCount}
+		</foreach>
+		,user_id=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.userId}
+		</foreach>
+		,post_count=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.postCount}
+		</foreach>
+		,modify_date=
+		<foreach collection="list" item="item" index="index" separator=" " open="case id" close="end">
+			when #{item.id} then #{item.modifyDate}
+		</foreach>
+		where id in
+		<foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+			#{item.id}
+		</foreach>
+	</update>
+
+
+	<delete id="deleteByMap" parameterType="map" >
+		delete from user_ext_info where 1=1 <include refid="Base_Where" />
+	</delete>
+
+	<delete id="deleteByIds"  parameterType="map">
+		delete from user_ext_info where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="selectByField" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from user_ext_info where ${_fieldName} in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<update id="addByField" parameterType="map">
+		update user_ext_info
+		<set>
+			<if test="fansCount != null">
+				fans_count= fans_count + #{fansCount},
+			</if>
+			<if test="attentionCount != null">
+				attention_count= attention_count + #{attentionCount},
+			</if>
+			<if test="receivePraiseCount != null">
+				receive_praise_count= receive_praise_count + #{receivePraiseCount},
+			</if>
+			<if test="receiveCollectCount != null">
+				receive_collect_count= receive_collect_count + #{receiveCollectCount},
+			</if>
+			<if test="postCount != null">
+				post_count= post_count + #{postCount},
+			</if>
+
+			<if test="modifyDate != null">
+				modify_date= #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updatePostCountByUserId" parameterType="map">
+		update user_ext_info set post_count=#{postCount} where user_id=#{userId}		
+	</update>
+
+	<!-- 用户列表查询 -->
+	<sql id="Query_Where">
+		<if test="fansCount != null"> and fans_count= #{fansCount}</if>
+		<if test="attentionCount != null"> and attention_count= #{attentionCount}</if>
+		<if test="lastAppVersion != null and lastAppVersion !=''"> and last_app_version like concat('%',#{lastAppVersion},'%')</if>
+	 	<if test="receivePraiseCount != null" > and receive_praise_count=#{receivePraiseCount} </if>
+    	<if test="receiveCollectCount != null" > and receive_collect_count=#{receiveCollectCount} </if>
+		<if test="postCount != null"> and post_count= #{postCount}</if>
+		<if test="userId != null"> and base.user_id= #{userId}</if>
+		<if test="grade != null"> and base.grade= #{grade}</if>
+		<if test="userName != null and userName !=''"> and user_name like  concat('%',#{userName},'%')  </if>
+		<if test="userStatus != null "> and user_status= #{userStatus}</if>
+		<if test="imgUrl != null and imgUrl !=''"> and img_url= #{imgUrl}</if>
+		<if test="mobile != null and mobile !=''"> and mobile= #{mobile}</if>
+		<if test="gender != null and gender !=''"> and gender= #{gender}</if>
+		<if test="birthday != null and birthday !=''"> and birthday= #{birthday}</if>
+		<if test="place != null and place !=''"> and place= #{place}</if>
+		<if test="userType != null"> and user_type= #{userType}</if>
+
+
+		<if test="startTime != null">and <![CDATA[create_time>=#{startTime}]]></if>
+		<if test="endTime != null"> and <![CDATA[ create_time<=#{endTime}]]> </if>
+
+		<if test="fansCountStart != null">and <![CDATA[fans_count>=#{fansCountStart}]]></if>
+		<if test="fansCountEnd != null">and <![CDATA[fans_count<=#{fansCountEnd}]]></if>
+
+		<if test="postCountStart != null">and <![CDATA[post_count>=#{postCountStart}]]></if>
+		<if test="postCountEnd != null">and <![CDATA[post_count<=#{postCountEnd}]]></if>
+		
+		<if test="receivePraiseCountStart != null">and <![CDATA[receive_praise_count>=#{receivePraiseCountStart}]]></if>
+		<if test="receivePraiseCountEnd != null">and <![CDATA[receive_praise_count<=#{receivePraiseCountEnd}]]></if>
+		
+		<if test="receiveCollectCountStart != null">and <![CDATA[receive_collect_count>=#{receiveCollectCountStart}]]></if>
+		<if test="receiveCollectCountEnd != null">and <![CDATA[receive_collect_count<=#{receiveCollectCountEnd}]]></if>
+
+	</sql>
+
+	<select id="queryPageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(*) from user_base_info base  LEFT JOIN user_ext_info  user_ext_info
+		on base.user_id=user_ext_info.user_id or user_ext_info.user_id  is null
+		where 1=1
+		<include refid="Query_Where" />
+
+	</select>
+	<select id="queryPageData" resultMap="UserBaseInfoMapper.BaseResultMap" parameterType="map">
+		select base.* from user_base_info base  LEFT JOIN user_ext_info  user_ext_info
+		on base.user_id=user_ext_info.user_id or user_ext_info.user_id  is null
+		where 1=1
+		<include refid="Query_Where" />
+		<if test="orderCondition != null and orderCondition !=''"> order by  ${orderCondition} </if>
+	</select>
+</mapper>

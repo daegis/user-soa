@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CommonAddressMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.CommonAddress">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="country_id" property="countryId" jdbcType="BIGINT" />
+		<result column="province_id" property="provinceId" jdbcType="BIGINT" />
+		<result column="city_id" property="cityId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="country_name" property="countryName" jdbcType="VARCHAR" />
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="detailed" property="detailed" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+		<result column="postal_code" property="postalCode" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="phone_prefix" property="phonePrefix" jdbcType="VARCHAR" />
+		<result column="province_code" property="provinceCode" jdbcType="VARCHAR" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="phone_country_name" property="phoneCountryName" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="countryId != null"> and country_id= #{countryId}</if>	
+		<if test="provinceId != null"> and province_id= #{provinceId}</if>	
+		<if test="cityId != null"> and city_id= #{cityId}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="countryName != null and countryName !=''"> and country_name= #{countryName}</if>
+		<if test="provinceName != null and provinceName !=''"> and province_name= #{provinceName}</if>
+		<if test="cityName != null and cityName !=''"> and city_name= #{cityName}</if>
+		<if test="userName != null and userName !=''"> and user_name= #{userName}</if>
+		<if test="detailed != null and detailed !=''"> and detailed= #{detailed}</if>
+		<if test="address != null and address !=''"> and address= #{address}</if>
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="lastModifyTime != null"> and last_modify_time= #{lastModifyTime}</if>	
+		<if test="postalCode != null and postalCode !=''"> and postal_code= #{postalCode}</if>
+		<if test="phone != null and phone !=''"> and phone= #{phone}</if>
+		<if test="countryCode != null and countryCode !=''"> and country_code= #{countryCode}</if>
+		<if test="isDelete != null"> and is_delete= #{isDelete}</if>	
+		<if test="phonePrefix != null and phonePrefix !=''"> and phone_prefix= #{phonePrefix}</if>
+		<if test="provinceCode != null and provinceCode !=''"> and province_code= #{provinceCode}</if>
+		<if test="cityCode != null and cityCode !=''"> and city_code= #{cityCode}</if>
+		<if test="phoneCountryName != null and phoneCountryName !=''"> and phone_country_name= #{phoneCountryName}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		country_id ,
+		province_id ,
+		city_id ,
+		user_id ,
+		country_name ,
+		province_name ,
+		city_name ,
+		user_name ,
+		detailed ,
+		address ,
+		create_time ,
+		last_modify_time ,
+		postal_code ,
+		phone ,
+		country_code ,
+		is_delete ,
+		phone_prefix ,
+		province_code ,
+		city_code,
+		phone_country_name 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from common_address
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from common_address
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.CommonAddress">
+		insert into common_address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="countryId != null">country_id,</if>	
+			<if test="provinceId != null">province_id,</if>	
+			<if test="cityId != null">city_id,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="countryName != null and countryName !=''">country_name,</if>
+			<if test="provinceName != null and provinceName !=''">province_name,</if>
+			<if test="cityName != null and cityName !=''">city_name,</if>
+			<if test="userName != null and userName !=''">user_name,</if>
+			<if test="detailed != null and detailed !=''">detailed,</if>
+			<if test="address != null and address !=''">address,</if>
+			<if test="createTime != null">create_time,</if>	
+			<if test="lastModifyTime != null">last_modify_time,</if>	
+			<if test="postalCode != null and postalCode !=''">postal_code,</if>
+			<if test="phone != null and phone !=''">phone,</if>
+			<if test="countryCode != null and countryCode !=''">country_code,</if>
+			<if test="isDelete != null">is_delete,</if>	
+			<if test="phonePrefix != null and phonePrefix !=''">phone_prefix,</if>
+			<if test="provinceCode != null and provinceCode !=''">province_code,</if>
+			<if test="cityCode != null and cityCode !=''">city_code,</if>
+			<if test="phoneCountryName != null and phoneCountryName !=''">phone_country_name,</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="countryId != null">
+				#{countryId,jdbcType=BIGINT},
+			</if>
+			<if test="provinceId != null">
+				#{provinceId,jdbcType=BIGINT},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="countryName != null and countryName !=''">
+				#{countryName,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceName != null and provinceName !=''">
+				#{provinceName,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null and cityName !=''">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null and userName !=''">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="detailed != null and detailed !=''">
+				#{detailed,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null and address !=''">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="postalCode != null and postalCode !=''">
+				#{postalCode,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null and phone !=''">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="countryCode != null and countryCode !=''">
+				#{countryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="phonePrefix != null and phonePrefix !=''">
+				#{phonePrefix,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceCode != null and provinceCode !=''">
+				#{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null and cityCode !=''">
+				#{cityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneCountryName != null and phoneCountryName !=''">
+				#{phoneCountryName,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.CommonAddress">
+		update common_address
+		<set>
+			<if test="countryId != null">
+				country_id= #{countryId,jdbcType=BIGINT},
+			</if>
+			<if test="provinceId != null">
+				province_id= #{provinceId,jdbcType=BIGINT},
+			</if>
+			<if test="cityId != null">
+				city_id= #{cityId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="countryName != null and countryName !=''">
+				country_name= #{countryName,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceName != null and provinceName !=''">
+				province_name= #{provinceName,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null and cityName !=''">
+				city_name= #{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null and userName !=''">
+				user_name= #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="detailed != null and detailed !=''">
+				detailed= #{detailed,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null and address !=''">
+				address= #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="postalCode != null and postalCode !=''">
+				postal_code= #{postalCode,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null and phone !=''">
+				phone= #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="countryCode != null and countryCode !=''">
+				country_code= #{countryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				is_delete= #{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="phonePrefix != null and phonePrefix !=''">
+				phone_prefix= #{phonePrefix,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceCode != null and provinceCode !=''">
+				province_code= #{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null and cityCode !=''">
+				city_code= #{cityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneCountryName != null and phoneCountryName !=''">
+				phone_country_name= #{phoneCountryName,jdbcType=VARCHAR},
+			</if>
+			<if test="postalCo != null and postalCo !=''">
+				postal_code= #{postalCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from common_address where 1=1
+		<include refid="Base_Where" /> order by create_time desc
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from common_address where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from common_address where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from common_address where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

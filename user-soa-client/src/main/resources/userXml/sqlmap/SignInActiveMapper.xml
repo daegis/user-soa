@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SignInActiveMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.SignInActive">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="active_name" property="activeName" jdbcType="VARCHAR" />
+		<result column="total_period" property="totalPeriod" jdbcType="INTEGER" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="reset" property="reset" jdbcType="INTEGER" />
+		<result column="basis_integral" property="basisIntegral" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="sign_in_active_rule" property="signInActiveRule" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="activeName != null and activeName !=''"> and active_name= #{activeName}</if>
+		<if test="totalPeriod != null"> and total_period= #{totalPeriod}</if>	
+		<if test="startTime != null"> and start_time= #{startTime}</if>	
+		<if test="endTime != null"> and end_time= #{endTime}</if>	
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="reset != null"> and reset= #{reset}</if>	
+		<if test="basisIntegral != null"> and basis_integral= #{basisIntegral}</if>	
+		<if test="status != null"> and status= #{status}</if>	
+		<if test="signInActiveRule != null and signInActiveRule !=''"> and sign_in_active_rule= #{signInActiveRule}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		active_name ,
+		total_period ,
+		start_time ,
+		end_time ,
+		create_time,
+		reset ,
+		basis_integral ,
+		status ,
+		sign_in_active_rule 
+	</sql>
+	<sql id="Base_Vo_Column_List">
+		s.id ,
+		active_name ,
+		total_period ,
+		start_time ,
+		end_time ,
+		create_time,
+		reset ,
+		r.basis_integral ,
+		status ,
+		sign_in_active_rule 
+	</sql>
+	<resultMap id="BaseResultVoMap" type="com.hnair.consumer.user.vo.SignInActiveVo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="active_name" property="activeName" jdbcType="VARCHAR" />
+		<result column="total_period" property="countPeriod" jdbcType="INTEGER" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="reset" property="reset" jdbcType="INTEGER" />
+		<result column="basis_integral" property="basisIntegral" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="sign_in_active_rule" property="signInActiveRule" jdbcType="VARCHAR" />
+	</resultMap>
+	
+		<resultMap id="BaseResultDataVoMap" type="com.hnair.consumer.user.vo.SignInActiveVo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="active_name" property="activeName" jdbcType="VARCHAR" />
+		<result column="total_period" property="countPeriod" jdbcType="INTEGER" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="reset" property="reset" jdbcType="INTEGER" />
+		<result column="basis_integral" property="basisIntegral" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="sign_in_active_rule" property="signInActiveRule" jdbcType="VARCHAR" />
+		<result column="totalNum" property="totalNum" jdbcType="INTEGER" />
+		<result column="totalPerson" property="totalPerson" jdbcType="INTEGER" />
+		<result column="toatlIntegral" property="toatlIntegral" jdbcType="INTEGER" />
+		
+	</resultMap>
+	
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from sign_in_active
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from sign_in_active
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.SignInActive" useGeneratedKeys="true" keyProperty="id">
+		insert into sign_in_active
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="activeName != null and activeName !=''">active_name,</if>
+			<if test="totalPeriod != null">total_period,</if>	
+			<if test="startTime != null">start_time,</if>	
+			<if test="endTime != null">end_time,</if>	
+			<if test="createTime != null">create_time,</if>	
+			<if test="reset != null">reset,</if>	
+			<if test="basisIntegral != null">basis_integral,</if>	
+			<if test="status != null">status,</if>	
+			<if test="signInActiveRule != null and signInActiveRule !=''">sign_in_active_rule,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="activeName != null and activeName !=''">
+				#{activeName,jdbcType=VARCHAR},
+			</if>
+			<if test="totalPeriod != null">
+				#{totalPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reset != null">
+				#{reset,jdbcType=INTEGER},
+			</if>
+			<if test="basisIntegral != null">
+				#{basisIntegral,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="signInActiveRule != null and signInActiveRule !=''">
+				#{signInActiveRule,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.SignInActive">
+		update sign_in_active
+		<set>
+			<if test="activeName != null and activeName !=''">
+				active_name= #{activeName,jdbcType=VARCHAR},
+			</if>
+			<if test="totalPeriod != null">
+				total_period= #{totalPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="startTime != null">
+				start_time= #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				end_time= #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reset != null">
+				reset= #{reset,jdbcType=INTEGER},
+			</if>
+			<if test="basisIntegral != null">
+				basis_integral= #{basisIntegral,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status= #{status,jdbcType=INTEGER},
+			</if>
+			<if test="signInActiveRule != null and signInActiveRule !=''">
+				sign_in_active_rule= #{signInActiveRule,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sign_in_active where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from sign_in_active where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="selectCountByCondition" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from sign_in_active where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sign_in_active where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sign_in_active where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="queryActiveList" resultMap="BaseResultVoMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sign_in_active where 1=1
+		<include refid="Base_Where" />
+		order by id desc
+	</select>
+	
+	
+	<select id="querySignInActiveByStatus" resultMap="BaseResultVoMap" parameterType="map">
+		select
+			<include refid="Base_Column_List" />
+		from sign_in_active where 1=1
+		<if test="status != null"> and status= #{status}</if>
+		<if test="nowDate != null">
+			and start_time <![CDATA[<=]]>#{nowDate} 
+			and end_time <![CDATA[>=]]>#{nowDate}
+		</if>
+		order by create_time desc
+	</select>
+	<select id="querySignInActiveById" resultMap="BaseResultVoMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sign_in_active where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="queryActiveData" resultMap="BaseResultVoMap" parameterType="map">
+		select
+		s.id ,
+		active_name ,
+		create_time ,
+		start_time ,
+		end_time ,
+		status ,
+		SUM(r.award_integral+r.basis_integral) toatlIntegral ,
+		COUNT(DISTINCT r.user_id) totalPerson ,
+		COUNT(r.id) totalNum
+		from sign_in_active s 
+		join sign_in_record r 
+		on s.id = r.sign_in_active_id
+		<if test="activeIds!=null">
+			where s.id in
+			<foreach item="item" index="index" collection="activeIds" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		group by s.id
+	</select>
+</mapper>

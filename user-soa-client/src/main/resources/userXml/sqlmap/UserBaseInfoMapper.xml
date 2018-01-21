@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserBaseInfoMapper">
+	<resultMap id="BaseResultMap" type="com.hnair.consumer.user.model.UserBaseInfo">
+		<id column="uid" property="uid" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_status" property="userStatus" jdbcType="SMALLINT" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="region" property="region" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="VARCHAR" />
+		<result column="place" property="place" jdbcType="LONGVARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+		<result column="user_type" property="userType" jdbcType="SMALLINT" />
+		<result column="open_id" property="openId" jdbcType="LONGVARCHAR" />
+		<result column="integral" property="integral" jdbcType="INTEGER" />
+		<result column="bind_type" property="bindType" jdbcType="TINYINT" />
+		<result column="grade" property="grade" jdbcType="SMALLINT" />
+		<result column="experience" property="experience" jdbcType="INTEGER" />
+		<result column="upgrade_time" property="upgradeTime" jdbcType="TIMESTAMP" />
+		<result column="new_flag" property="newFlag" jdbcType="INTEGER" />
+		<result column="regist_channel" property="registChannel" jdbcType="VARCHAR" />
+		<result column="update_version" property="updateVersion" jdbcType="INTEGER" />
+		<result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="uid != null"> and uid= #{uid}</if>	
+		<if test="userId != null"> and user_id= #{userId}</if>	
+		<if test="userIdStart != null"> and user_id &gt; #{userIdStart}</if>
+		<if test="userName != null and userName !=''"> and user_name like concat('%',#{userName},'%')</if>
+		<if test="userStatus != null "> and user_status= #{userStatus}</if>
+		<if test="imgUrl != null and imgUrl !=''"> and img_url= #{imgUrl}</if>
+		<if test="region != null and region !=''"> and ( region= #{region} or region is null )</if>
+		<if test="mobile != null and mobile !=''"> and mobile= #{mobile}</if>
+		<if test="gender != null and gender !=''"> and gender= #{gender}</if>
+		<if test="birthday != null and birthday !=''"> and birthday= #{birthday}</if>
+		<if test="place != null and place !=''"> and place= #{place}</if>
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="lastModifyTime != null"> and last_modify_time= #{lastModifyTime}</if>
+		<if test="lastModifyTimeGt != null"> and last_modify_time &gt;= #{lastModifyTimeGt}</if>
+		<if test="userType != null"> and user_type= #{userType}</if>
+		<if test="openId != null and openId !=''"> and open_id= #{openId}</if>
+		<if test="bindType != null"> and bind_type= #{bindType}</if>
+		<if test="grade != null"> and grade= #{grade}</if>	
+		<if test="experience != null"> and experience= #{experience}</if>	
+		<if test="upgradeTime != null"> and upgrade_time= #{upgradeTime}</if>	
+		<if test="newFlag != null"> and new_flag= #{newFlag}</if>
+		<if test="registChannel != null and registChannel !=''"> and regist_channel= #{registChannel}</if>
+		<if test="updateVersion != null"> and update_version= #{updateVersion}</if>
+		<if test="integral != null"> and integral= #{integral}</if>	
+		<if test="mobileLike != null"> and mobile like #{mobileLike}</if>	
+		<if test="userIds != null">
+	    	and user_id in 
+	    	<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+	  			#{item}  
+	  		</foreach>
+	    </if>	
+	</sql>
+	<sql id="Base_Column_List">
+		uid ,
+		user_id ,
+		user_name ,
+		user_status ,
+		img_url ,
+		region,
+		mobile ,
+		gender ,
+		birthday ,
+		place ,
+		create_time ,
+		last_modify_time ,
+		user_type ,
+		open_id ,
+		integral ,
+		bind_type ,
+		grade ,
+		experience ,
+		upgrade_time ,
+		new_flag ,
+		regist_channel,
+		update_version,
+		identity_card
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info
+		where
+		uid = #{uid,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from user_base_info
+		where
+		uid = #{uid,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hnair.consumer.user.model.UserBaseInfo">
+		insert into user_base_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uid != null">uid,</if>	
+			<if test="userId != null">user_id,</if>	
+			<if test="userName != null and userName !=''">user_name,</if>
+			<if test="userStatus != null ">user_status,</if>
+			<if test="imgUrl != null and imgUrl !=''">img_url,</if>
+			<if test="region != null and region !=''">region,</if>
+			<if test="mobile != null and mobile !=''">mobile,</if>
+			<if test="gender != null and gender !=''">gender,</if>
+			<if test="birthday != null and birthday !=''">birthday,</if>
+			<if test="place != null and place !=''">place,</if>
+			<if test="createTime != null">create_time,</if>	
+			<if test="lastModifyTime != null">last_modify_time,</if>
+			<if test="userType != null">user_type,</if>
+			<if test="openId != null and openId !=''">open_id,</if>
+			<if test="integral != null">integral,</if>	
+			<if test="bindType != null">bind_type,</if>
+			<if test="grade != null">grade,</if>	
+			<if test="experience != null">experience,</if>	
+			<if test="upgradeTime != null">upgrade_time,</if>	
+			<if test="newFlag != null">new_flag,</if>
+			<if test="registChannel != null and registChannel != ''">regist_channel,</if>
+			<if test="updateVersion != null">update_version,</if>
+			<if test="identityCard != null and identityCard !=''">identity_card,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="uid != null">
+				#{uid,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null and userName !=''">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+
+			<if test="userStatus != null and userStatus !=''">
+				#{userStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="imgUrl != null and imgUrl !=''">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="region != null and region !=''">
+				#{region,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null and gender !=''">
+				#{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null and birthday !=''">
+				#{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="place != null and place !=''">
+				#{place,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				#{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userType != null">
+				#{userType,jdbcType=SMALLINT},
+			</if>
+			<if test="openId != null and openId !=''">
+				#{openId,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="integral != null">
+				#{integral,jdbcType=INTEGER},
+			</if>
+			<if test="bindType != null">
+				#{bindType,jdbcType=TINYINT},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=SMALLINT},
+			</if>
+			<if test="experience != null">
+				#{experience,jdbcType=INTEGER},
+			</if>
+			<if test="upgradeTime != null">
+				#{upgradeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="newFlag != null">
+				#{newFlag,jdbcType=INTEGER},
+			</if>
+			<if test="registChannel != null and registChannel !=''">
+				#{registChannel,jdbcType=VARCHAR},
+			</if>
+			<if test="updateVersion != null">
+				#{updateVersion,jdbcType=INTEGER},
+			</if>
+			<if test="identityCard != null and identityCard !=''">
+				#{identityCard,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.hnair.consumer.user.model.UserBaseInfo">
+		update user_base_info
+		<set>
+			<if test="userId != null">
+				user_id= #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null and userName !=''">
+				user_name= #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userStatus != null ">
+				user_status= #{userStatus,jdbcType=SMALLINT},
+			</if>
+			<if test="imgUrl != null and imgUrl !=''">
+				img_url= #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="region != null and region !=''">
+				region= #{region,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null and mobile !=''">
+				mobile= #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null and gender !=''">
+				gender= #{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null and birthday !=''">
+				birthday= #{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="place != null and place !=''">
+				place= #{place,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userType != null">
+				user_type= #{userType,jdbcType=SMALLINT},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openId != null and openId !=''">
+				open_id= #{openId,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="integral != null">
+				integral= #{integral,jdbcType=INTEGER},
+			</if>
+			<if test="bindType != null">
+				bind_type= #{bindType,jdbcType=TINYINT},
+			</if>
+			<if test="grade != null">
+				grade= #{grade,jdbcType=SMALLINT},
+			</if>
+			<if test="experience != null">
+				experience= #{experience,jdbcType=INTEGER},
+			</if>
+			<if test="upgradeTime != null">
+				upgrade_time= #{upgradeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="newFlag != null">
+				new_flag= #{newFlag,jdbcType=INTEGER},
+			</if>
+			<if test="registChannel != null and registChannel != ''">
+				regist_channel= #{registChannel,jdbcType=VARCHAR},
+			</if>
+			<if test="updateVersion != null">
+				update_version= #{updateVersion,jdbcType=INTEGER}
+			</if>
+			<if test="identityCard != null and identityCard !=''">
+				identity_card= #{identityCard,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		uid = #{uid,jdbcType=BIGINT}
+	</update>
+	
+<update id="updateBaseInfo" parameterType="com.hnair.consumer.user.model.UserBaseInfo">
+		update user_base_info
+		<set>
+			
+			<if test="userName != null and userName !=''">
+				user_name= #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userStatus != null ">
+				user_status= #{userStatus,jdbcType=SMALLINT},
+			</if>
+			<if test="imgUrl != null and imgUrl !=''">
+				img_url= #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null and gender !=''">
+				gender= #{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null and birthday !=''">
+				birthday= #{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="place != null and place !=''">
+				place= #{place,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userType != null">
+				user_type= #{userType,jdbcType=SMALLINT},
+			</if>
+			<if test="integral != null">
+				integral= #{integral,jdbcType=INTEGER},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time= #{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="grade != null">
+				grade= #{grade,jdbcType=SMALLINT},
+			</if>
+			<if test="experience != null">
+				experience= #{experience,jdbcType=INTEGER},
+			</if>
+			<if test="upgradeTime != null">
+				upgrade_time= #{upgradeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="newFlag != null">
+				new_flag= #{newFlag,jdbcType=INTEGER},
+			</if>
+			<if test="registChannel != null and registChannel != ''">
+				regist_channel= #{registChannel,jdbcType=VARCHAR},
+			</if>
+			<if test="updateVersion != null">
+				update_version= #{updateVersion,jdbcType=INTEGER}
+			</if>
+			<if test="identityCard != null and identityCard !=''">
+				identity_card= #{identityCard,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where  user_id= #{userId,jdbcType=BIGINT}
+	</update>
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info where 1=1
+		<include refid="Base_Where" /> order by user_id desc
+	</select>
+	
+	<select id="getAllSortAsc" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info where 1=1
+		<include refid="Base_Where" /> order by user_id asc LIMIT #{pageSize}
+	</select>
+
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from user_base_info where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info where 1=1
+		<include refid="Base_Where" /> order by user_id desc
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info where uid in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach> order by user_id desc
+	</select>
+
+	<select id="getUsersByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info where user_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>  order by user_id desc
+	</select>
+
+	<select id="getUsersByDate" resultMap="BaseResultMap"  parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from user_base_info where 1=1
+		<if test="userStatus != null">
+			AND user_status= #{userStatus}
+		</if>
+		<if test="startTime != null and startTime != ''">
+			and <![CDATA[create_time>=#{startTime}]]>
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and <![CDATA[create_time<=#{endTime}]]>
+		</if>
+	</select>
+	
+	<update id="consumeIntegral" parameterType="map">
+		UPDATE user_base_info u SET u.integral=u.integral-#{integral},update_version= #{updateVersion} WHERE u.mobile=#{mobile} AND u.integral &gt;= #{integral} and (update_version= #{updateVersion} - 1 or update_version is null)
+	</update>
+	
+	<update id="refundIntegral" parameterType="map">
+		UPDATE user_base_info u SET u.integral=(CASE WHEN u.integral is NULL THEN 0 ELSE u.integral END)+#{integral},update_version= #{updateVersion} WHERE u.mobile=#{mobile} and (update_version= #{updateVersion} - 1 or update_version is null)
+	</update>
+
+	<select id="queryRandomUserBaseInfo" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM (SELECT
+		t1.*
+		FROM
+		user_base_info AS t1
+		JOIN (
+		SELECT ROUND( RAND() * (
+		(SELECT MAX(uid) FROM user_base_info WHERE user_status = '1' AND user_type='2' AND mobile LIKE '2%' )
+		- (SELECT MIN(uid) FROM user_base_info WHERE user_status = '1' AND user_type='2' AND mobile LIKE '2%' )
+		)
+		+ ( SELECT MIN(uid) FROM user_base_info WHERE user_status = '1' AND user_type='2' AND mobile LIKE '2%')) AS uid
+		) AS t2
+		WHERE
+		t1.uid >= t2.uid
+		AND user_status = '1' AND user_type='2' AND mobile LIKE '2%'
+		ORDER BY t1.uid
+		LIMIT 1)t
+	</select>
+
+</mapper>
